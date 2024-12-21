@@ -1,0 +1,1 @@
+export const API_TOKEN = Deno.env.get("API_TOKEN") || "";
