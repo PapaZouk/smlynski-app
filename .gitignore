@@ -4,10 +4,10 @@
 .env.test.local
 .env.production.local
 .env.local
+**/*.xml
 
 # Fresh build directory
 _fresh/
 # npm dependencies
 node_modules/
 .idea/**
-.idea/workspace.xml
