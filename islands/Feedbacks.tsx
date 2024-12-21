@@ -1,5 +1,5 @@
 import { Signal, useSignal } from "@preact/signals";
-import { useEffect } from 'preact/hooks';
+import { useEffect } from "preact/hooks";
 import FeedbackTile from "../components/FeedbackTile.tsx";
 import { Feedback } from "../components/utils/api-client/types/Feedback.ts";
 
@@ -12,32 +12,38 @@ export default function Feedbacks({ initialFeedbacks }: FeedbacksProps) {
   const currentIndex: Signal<number> = useSignal(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      currentIndex.value = (currentIndex.value + 1) % feedbacks.value.result.length;
-    }, 6000);
+    if (feedbacks.value.result.length > 3) {
+      const interval = setInterval(() => {
+        currentIndex.value = (currentIndex.value + 1) % feedbacks.value.result.length;
+      }, 7000);
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }
   }, [feedbacks.value.result.length]);
+
+  const displayedFeedbacks = feedbacks.value.result.length > 3
+      ? [
+        ...feedbacks.value.result.slice(currentIndex.value, currentIndex.value + 3),
+        ...feedbacks.value.result.slice(0, Math.max(0, 3 - (feedbacks.value.result.length - currentIndex.value)))
+      ]
+      : feedbacks.value.result;
 
   return (
       <div
           className="bg-gray-800 p-8 rounded-lg shadow-lg mb-8 relative"
-          style={{marginBottom: "200px", height: "300px"}}
+          style={{marginBottom: "200px"}}
       >
-        <h1 className="text-3xl font-bold mb-6 text-center text-white">
+        <h1 className="text-4xl font-bold mb-10 text-center text-white">
           Opinie naszych klientów
         </h1>
-        <div className="relative h-full">
-          {feedbacks.value.result.map((feedback: Feedback, index: number) => (
-              <ul
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-1000 ${
-                      index === currentIndex.value ? "opacity-100" : "opacity-0"
-                  }`}
-              >
-                <FeedbackTile feedback={feedback}/>
-              </ul>
-          ))}
+        <div className="relative">
+          <div className="flex flex-col md:flex-row gap-8 justify-center transition-transform duration-500 ease-in-out">
+            <ul className="flex flex-col md:flex-row gap-8">
+              {displayedFeedbacks.map((feedback: Feedback) => (
+                  <FeedbackTile key={feedback._id} feedback={feedback}/>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
   );

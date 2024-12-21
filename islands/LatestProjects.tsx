@@ -22,7 +22,7 @@ export default function LatestProjects(
       className="bg-gray-100 p-8 rounded-lg shadow-lg mb-8"
       style={{ marginTop: "500px" }}
     >
-      <h1 className="text-3xl font-bold mb-20 text-center text-gray-800">
+      <h1 className="text-4xl font-bold mb-20 text-center text-gray-800">
         Nasze najnowsze realizacje
       </h1>
       <ul>
