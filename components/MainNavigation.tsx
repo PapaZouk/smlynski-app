@@ -73,7 +73,7 @@ export default function MainNavigation() {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 <a
-                  href="#"
+                  href="/"
                   onClick={handleLinkClick}
                   className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                   aria-current="page"
@@ -102,7 +102,7 @@ export default function MainNavigation() {
                   Oferta
                 </a>
                 <a
-                  href="#"
+                  href="/contact"
                   onClick={handleLinkClick}
                   className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                 >
@@ -125,7 +125,7 @@ export default function MainNavigation() {
             Strona główna
           </a>
           <a
-            href="#"
+            href="/"
             className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
             onClick={handleLinkClick}
           >
@@ -146,7 +146,7 @@ export default function MainNavigation() {
             Oferta
           </a>
           <a
-            href="#"
+            href="/contact"
             className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
             onClick={handleLinkClick}
           >

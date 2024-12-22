@@ -7,7 +7,6 @@ export default function Footer() {
                         <img src='/images/logo.png' alt="Logo" class="h-20 w-auto" />
                     </div>
 
-                    {/* Navigation Links */}
                     <div class="flex space-x-4 mb-2 md:mb-0">
                         <a href="/" class="hover:underline">
                             Strona główna
