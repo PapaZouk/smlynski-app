@@ -4,6 +4,7 @@ on:
     branches: master
   pull_request:
     branches: master
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -32,5 +33,6 @@ jobs:
           project: "smlynski-app"
           entrypoint: "main.ts"
           root: "."
-          
-          
+        env:
+          DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
+
