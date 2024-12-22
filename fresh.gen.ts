@@ -7,9 +7,12 @@ import * as $_app from "./routes/_app.tsx";
 import * as $contact from "./routes/contact.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $CompanyContact from "./islands/CompanyContact.tsx";
+import * as $CompanyContactMap from "./islands/CompanyContactMap.tsx";
 import * as $Feedbacks from "./islands/Feedbacks.tsx";
 import * as $HeroHeader from "./islands/HeroHeader.tsx";
 import * as $LatestProjects from "./islands/LatestProjects.tsx";
+import * as $MainNavigation from "./islands/MainNavigation.tsx";
+import * as $RootLayout from "./islands/RootLayout.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -21,9 +24,12 @@ const manifest = {
   },
   islands: {
     "./islands/CompanyContact.tsx": $CompanyContact,
+    "./islands/CompanyContactMap.tsx": $CompanyContactMap,
     "./islands/Feedbacks.tsx": $Feedbacks,
     "./islands/HeroHeader.tsx": $HeroHeader,
     "./islands/LatestProjects.tsx": $LatestProjects,
+    "./islands/MainNavigation.tsx": $MainNavigation,
+    "./islands/RootLayout.tsx": $RootLayout,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
