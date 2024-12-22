@@ -10,6 +10,4 @@ import { start } from "$fresh/server.ts";
 import manifest from "./fresh.gen.ts";
 import config from "./fresh.config.ts";
 
-console.log(Deno.env.get("API_TOKEN"));
-
 await start(manifest, config);

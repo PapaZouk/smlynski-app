@@ -4,11 +4,13 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $about from "./routes/about.tsx";
 import * as $contact from "./routes/contact.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $CompanyContact from "./islands/CompanyContact.tsx";
 import * as $CompanyContactMap from "./islands/CompanyContactMap.tsx";
 import * as $Feedbacks from "./islands/Feedbacks.tsx";
+import * as $Footer from "./islands/Footer.tsx";
 import * as $HeroHeader from "./islands/HeroHeader.tsx";
 import * as $LatestProjects from "./islands/LatestProjects.tsx";
 import * as $MainNavigation from "./islands/MainNavigation.tsx";
@@ -19,6 +21,7 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/about.tsx": $about,
     "./routes/contact.tsx": $contact,
     "./routes/index.tsx": $index,
   },
@@ -26,6 +29,7 @@ const manifest = {
     "./islands/CompanyContact.tsx": $CompanyContact,
     "./islands/CompanyContactMap.tsx": $CompanyContactMap,
     "./islands/Feedbacks.tsx": $Feedbacks,
+    "./islands/Footer.tsx": $Footer,
     "./islands/HeroHeader.tsx": $HeroHeader,
     "./islands/LatestProjects.tsx": $LatestProjects,
     "./islands/MainNavigation.tsx": $MainNavigation,

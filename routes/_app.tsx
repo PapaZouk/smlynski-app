@@ -1,7 +1,7 @@
 import { type PageProps } from "$fresh/server.ts";
 import RootLayout from "../islands/RootLayout.tsx";
 import { Head } from "$fresh/src/runtime/head.ts";
-import Footer from "../components/Footer.tsx";
+import Footer from "../islands/Footer.tsx";
 
 export default function App({ Component }: PageProps) {
   return (
