@@ -106,3 +106,29 @@ export async function getProjectById(id: string, cacheTimeout?: string|undefined
 
   return data;
 }
+
+export async function getOfferById(id: string, cacheTimeout?: string|undefined) {
+  const cacheKey = `offerCache_${id}`;
+  const cachedData = await getCachedData(cacheKey, cacheTimeout ?? '3600000');
+
+  if (cachedData) {
+    return cachedData;
+  }
+
+  const { url, token } = getConfig();
+  const response = await fetch(`${url}/offer/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "authorization": `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch offer");
+  }
+
+  const data = await response.json();
+  setCachedData(cacheKey, data);
+
+  return data;
+}

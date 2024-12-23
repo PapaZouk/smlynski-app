@@ -8,6 +8,7 @@ import * as $about from "./routes/about.tsx";
 import * as $contact from "./routes/contact.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $offer from "./routes/offer.tsx";
+import * as $offer_id_ from "./routes/offer/[id].tsx";
 import * as $project_id_ from "./routes/project/[id].tsx";
 import * as $projects from "./routes/projects.tsx";
 import * as $CompanyContact from "./islands/CompanyContact.tsx";
@@ -17,6 +18,7 @@ import * as $Footer from "./islands/Footer.tsx";
 import * as $HeroHeader from "./islands/HeroHeader.tsx";
 import * as $LatestProjects from "./islands/LatestProjects.tsx";
 import * as $MainNavigation from "./islands/MainNavigation.tsx";
+import * as $OfferDetails from "./islands/OfferDetails.tsx";
 import * as $Offers from "./islands/Offers.tsx";
 import * as $ProjectDetails from "./islands/ProjectDetails.tsx";
 import * as $Projects from "./islands/Projects.tsx";
@@ -31,6 +33,7 @@ const manifest = {
     "./routes/contact.tsx": $contact,
     "./routes/index.tsx": $index,
     "./routes/offer.tsx": $offer,
+    "./routes/offer/[id].tsx": $offer_id_,
     "./routes/project/[id].tsx": $project_id_,
     "./routes/projects.tsx": $projects,
   },
@@ -42,6 +45,7 @@ const manifest = {
     "./islands/HeroHeader.tsx": $HeroHeader,
     "./islands/LatestProjects.tsx": $LatestProjects,
     "./islands/MainNavigation.tsx": $MainNavigation,
+    "./islands/OfferDetails.tsx": $OfferDetails,
     "./islands/Offers.tsx": $Offers,
     "./islands/ProjectDetails.tsx": $ProjectDetails,
     "./islands/Projects.tsx": $Projects,

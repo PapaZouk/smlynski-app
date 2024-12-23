@@ -44,9 +44,9 @@ export default function Offers({ initialOffers }: OffersProps) {
                         <div className="p-4 pb-16">
                             <h3 className="text-xl font-semibold mb-2">{offer.title}</h3>
                             <p className="text-gray-700 mb-4">{offer.description}</p>
-                            <a href={offer._id}
+                            <button onClick={() => globalThis.location.href = `/offer/${offer._id}`}
                                className="py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 absolute bottom-4 right-4">Zobacz
-                                więcej</a>
+                                więcej</button>
                         </div>
                     </div>
                 ))}
