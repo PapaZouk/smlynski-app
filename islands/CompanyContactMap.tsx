@@ -45,5 +45,5 @@ export default function CompanyContactMap({ googleMap }: CompanyContactMapProps)
         });
     }, [googleMap]);
 
-    return <div ref={mapRef} style={{ width: "100%", height: "400px" }} />;
+    return <div className="mb-20" ref={mapRef} style={{ width: "100%", height: "400px" }} />;
 };

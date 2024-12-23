@@ -9,7 +9,7 @@ type OffersProps = {
 export default function Offers({ initialOffers }: OffersProps) {
     const offers: Signal = useSignal<Offer[]>(initialOffers);
     const currentPage: Signal = useSignal<number>(1);
-    const OFFERS_PER_PAGE = 8;
+    const OFFERS_PER_PAGE = 6;
 
     let data: Offer[] = [];
 
@@ -27,8 +27,13 @@ export default function Offers({ initialOffers }: OffersProps) {
     const currentOffers: Offer[] = data.slice(indexOfFirstOffer, indexOfLastOffer);
 
     return (
-        <div className="container mx-auto p-6 mb-60 sm:mb-40">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="container mx-auto px-4 mt-8 sm:mt-16 sm:px-40 mb-64 sm:mb-42">
+            <header className="mb-12 mx-auto text-center">
+                <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-800">
+                    Zapoznaj się z naszą ofertą
+                </h1>
+            </header>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                 {currentOffers.map((offer: Offer, index) => (
                     <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden relative">
                         <img
@@ -39,13 +44,15 @@ export default function Offers({ initialOffers }: OffersProps) {
                         <div className="p-4 pb-16">
                             <h3 className="text-xl font-semibold mb-2">{offer.title}</h3>
                             <p className="text-gray-700 mb-4">{offer.description}</p>
-                            <a href={offer._id} className="py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 absolute bottom-4 right-4">Zobacz więcej</a>
+                            <a href={offer._id}
+                               className="py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 absolute bottom-4 right-4">Zobacz
+                                więcej</a>
                         </div>
                     </div>
                 ))}
             </div>
             <div className="mt-6 flex justify-center mb-26">
-                {totalPages > 1 && Array.from({ length: totalPages }, (_, index) => (
+                {totalPages > 1 && Array.from({length: totalPages}, (_, index) => (
                     <button
                         key={index}
                         onClick={() => handlePageChange(index + 1)}
@@ -54,6 +61,9 @@ export default function Offers({ initialOffers }: OffersProps) {
                         {index + 1}
                     </button>
                 ))}
+            </div>
+            <div>
+                {}
             </div>
         </div>
     )

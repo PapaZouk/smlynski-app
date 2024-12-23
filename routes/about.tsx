@@ -32,7 +32,7 @@ export default function AboutPage() {
             </div>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 relative -top-16">
                 <div className="mx-auto max-w-2xl lg:mx-0 bg-black bg-opacity-50 p-6 rounded-lg">
-                    <h2 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-7xl">
+                    <h2 className="text-4xl sm:text-5xl font-extrabold text-white">
                         O nas
                     </h2>
                     <p className="mt-6 text-base leading-relaxed text-gray-300 sm:text-lg md:text-xl">

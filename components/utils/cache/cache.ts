@@ -1,10 +1,10 @@
 const cacheStore: Record<string, { data: any, timestamp: number }> = {};
 
-export function getCachedData(key: string, expiry: number) {
+export function getCachedData(key: string, expiry: string) {
     const cached = cacheStore[key];
 
     if (cached) {
-        if (Date.now() - cached.timestamp < expiry) {
+        if (Date.now() - cached.timestamp < Number.parseInt(expiry, 10)) {
             return cached.data;
         } else {
             delete cacheStore[key];
