@@ -1,4 +1,5 @@
 import { createElement } from "https://esm.sh/v128/preact@10.22.0/src/index.js";
+import Popup from "../Popup.tsx";
 
 type CompanyContactFormProps = {
   formData: {
@@ -8,11 +9,13 @@ type CompanyContactFormProps = {
     message: string;
   };
   emailSent: boolean;
+  popupOpened: boolean;
   handleChange: (e: createElement.JSX.TargetedEvent<HTMLInputElement | HTMLTextAreaElement, Event>) => void;
   handleSubmit: (e: createElement.JSX.TargetedEvent<HTMLFormElement, Event>) => void;
+  handlePopup: () => void;
 };
 
-export default function CompanyContactForm({ formData, emailSent, handleChange, handleSubmit }: CompanyContactFormProps) {
+export default function CompanyContactForm({ formData, emailSent, popupOpened, handleChange, handleSubmit, handlePopup }: CompanyContactFormProps) {
   return (
     <form onSubmit={handleSubmit} className="p-8 bg-white shadow-lg rounded-lg w-full max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold mb-8 text-center text-gray-800">Skontaktuj się z nami</h1>
@@ -48,7 +51,6 @@ export default function CompanyContactForm({ formData, emailSent, handleChange, 
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          required
           className="mt-2 p-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-lg bg-gray-50"
         />
       </div>
@@ -66,8 +68,10 @@ export default function CompanyContactForm({ formData, emailSent, handleChange, 
       <button type="submit" className="w-full py-3 px-6 rounded-lg bg-indigo-600 text-white font-medium text-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
         Wyślij
       </button>
-      {emailSent && <div className="mt-6 text-green-600 text-center">
-        <p>Wiadomość wysłana!</p>
+      {emailSent && !popupOpened && <div className="mt-6 text-green-600 text-center">
+          <Popup onClose={handlePopup}>
+              <p>Wiadomość wysłana!</p>
+          </Popup>
       </div>}
     </form>
   );

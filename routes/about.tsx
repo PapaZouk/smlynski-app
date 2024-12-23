@@ -30,7 +30,7 @@ export default function AboutPage() {
                     }}
                 ></div>
             </div>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 relative -top-16">
+            <div className="mx-auto max-w-7xl mt-6 sm:mt-10 px-4 sm:px-6 lg:px-8 pb-12 relative -top-16">
                 <div className="mx-auto max-w-2xl lg:mx-0 bg-black bg-opacity-50 p-6 rounded-lg">
                     <h2 className="text-4xl sm:text-5xl font-extrabold text-white">
                         O nas

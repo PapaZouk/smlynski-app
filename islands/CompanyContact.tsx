@@ -19,6 +19,7 @@ export default function CompanyContact({ emailClientConfig }: CompanyContactProp
         message: "",
     });
     const [emailSent, setEmailSent] = useState(false);
+    const [isPopupOpened, setIsPopupOpened] = useState(false);
 
     const handleChange = (e: createElement.JSX.TargetedEvent<HTMLInputElement | HTMLTextAreaElement, Event>) => {
         const target = e.target as HTMLInputElement | HTMLTextAreaElement;
@@ -28,6 +29,10 @@ export default function CompanyContact({ emailClientConfig }: CompanyContactProp
             [name]: value,
         }));
     };
+
+    const handlePopup = () => {
+        setIsPopupOpened(!isPopupOpened);
+    }
 
     const handleSubmit = async (e: createElement.JSX.TargetedEvent<HTMLFormElement, Event>) => {
         e.preventDefault();
@@ -66,8 +71,10 @@ export default function CompanyContact({ emailClientConfig }: CompanyContactProp
         <CompanyContactForm
             formData={formData}
             emailSent={emailSent}
+            popupOpened={isPopupOpened}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            handlePopup={handlePopup}
         />
     );
 }
