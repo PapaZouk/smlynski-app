@@ -4,15 +4,15 @@ export default function MainNavigation() {
   const isMenuOpen: Signal<boolean> = useSignal(false);
   const currentPath = globalThis.location ? globalThis.location.pathname : "/";
 
-  const handleMenuToggle = () => {
+  const handleMenuToggle = (): void => {
     isMenuOpen.value = !isMenuOpen.value;
   };
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (): void => {
     isMenuOpen.value = false;
   };
 
-  const getLinkClass = (path: string) => {
+  const getLinkClass = (path: string): string => {
     return `rounded-md px-3 py-2 text-sm font-medium ${
       currentPath === path ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white"
     }`;

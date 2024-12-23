@@ -1,4 +1,11 @@
-export default function Footer() {
+type FooterProps = {
+    footerSetup: {
+        facebookUrl: string;
+        companyName: string;
+    }
+}
+
+export default function Footer({ footerSetup }: FooterProps) {
     return (
         <footer class="bg-gray-800 text-white py-4 fixed bottom-0 w-full">
             <div class="container mx-auto px-4">
@@ -8,7 +15,7 @@ export default function Footer() {
                     </div>
 
                     <div class="flex space-x-4 mb-2 md:mb-0">
-                        <a href="/static" class="hover:underline">
+                        <a href="/" class="hover:underline">
                             Strona główna
                         </a>
                         <a href="/about" class="hover:underline">
@@ -20,7 +27,7 @@ export default function Footer() {
                     </div>
 
                     <div class="flex space-x-4">
-                        <a href={Deno.env.get("FACEBOOK_URL")} class="hover:text-gray-400">
+                        <a href={footerSetup.facebookUrl} class="hover:text-gray-400">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
@@ -33,7 +40,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div class="mt-4 text-center text-sm text-gray-400">
-                    &copy; {new Date().getFullYear()} {Deno.env.get('COMPANY_NAME')}
+                    &copy; {new Date().getFullYear()} {footerSetup.companyName}
                 </div>
             </div>
         </footer>

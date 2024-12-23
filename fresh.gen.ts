@@ -7,6 +7,7 @@ import * as $_app from "./routes/_app.tsx";
 import * as $about from "./routes/about.tsx";
 import * as $contact from "./routes/contact.tsx";
 import * as $index from "./routes/index.tsx";
+import * as $offer from "./routes/offer.tsx";
 import * as $CompanyContact from "./islands/CompanyContact.tsx";
 import * as $CompanyContactMap from "./islands/CompanyContactMap.tsx";
 import * as $Feedbacks from "./islands/Feedbacks.tsx";
@@ -14,6 +15,7 @@ import * as $Footer from "./islands/Footer.tsx";
 import * as $HeroHeader from "./islands/HeroHeader.tsx";
 import * as $LatestProjects from "./islands/LatestProjects.tsx";
 import * as $MainNavigation from "./islands/MainNavigation.tsx";
+import * as $Offers from "./islands/Offers.tsx";
 import * as $RootLayout from "./islands/RootLayout.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
@@ -24,6 +26,7 @@ const manifest = {
     "./routes/about.tsx": $about,
     "./routes/contact.tsx": $contact,
     "./routes/index.tsx": $index,
+    "./routes/offer.tsx": $offer,
   },
   islands: {
     "./islands/CompanyContact.tsx": $CompanyContact,
@@ -33,6 +36,7 @@ const manifest = {
     "./islands/HeroHeader.tsx": $HeroHeader,
     "./islands/LatestProjects.tsx": $LatestProjects,
     "./islands/MainNavigation.tsx": $MainNavigation,
+    "./islands/Offers.tsx": $Offers,
     "./islands/RootLayout.tsx": $RootLayout,
   },
   baseUrl: import.meta.url,
