@@ -6,13 +6,11 @@ export default function CookiePopup() {
     const consent = useConsent();
 
     const handleAccept = (): void => {
-        console.log("Setting cookie");
         globalThis.document.cookie = "cookie-consent=true; max-age=31536000";
         consent.value = true;
     };
 
     const handleReject = (): void => {
-        console.log("Rejecting cookie");
         consent.value = false;
         showPopup.value = false;
     }
