@@ -1,5 +1,5 @@
 import { createElement } from "https://esm.sh/v128/preact@10.22.0/src/index.js";
-import Popup from "../Popup.tsx";
+import Popup from "../popups/Popup.tsx";
 
 type CompanyContactFormProps = {
   formData: {

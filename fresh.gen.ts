@@ -13,6 +13,8 @@ import * as $project_id_ from "./routes/project/[id].tsx";
 import * as $projects from "./routes/projects.tsx";
 import * as $CompanyContact from "./islands/CompanyContact.tsx";
 import * as $CompanyContactMap from "./islands/CompanyContactMap.tsx";
+import * as $ConsentProvider from "./islands/ConsentProvider.tsx";
+import * as $CookiePopup from "./islands/CookiePopup.tsx";
 import * as $Feedbacks from "./islands/Feedbacks.tsx";
 import * as $Footer from "./islands/Footer.tsx";
 import * as $HeroHeader from "./islands/HeroHeader.tsx";
@@ -40,6 +42,8 @@ const manifest = {
   islands: {
     "./islands/CompanyContact.tsx": $CompanyContact,
     "./islands/CompanyContactMap.tsx": $CompanyContactMap,
+    "./islands/ConsentProvider.tsx": $ConsentProvider,
+    "./islands/CookiePopup.tsx": $CookiePopup,
     "./islands/Feedbacks.tsx": $Feedbacks,
     "./islands/Footer.tsx": $Footer,
     "./islands/HeroHeader.tsx": $HeroHeader,
