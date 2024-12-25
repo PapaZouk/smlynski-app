@@ -6,11 +6,17 @@ import {ConsentContextProvider} from "../islands/ConsentProvider.tsx";
 
 export default function App({ Component }: PageProps) {
   const pageTitle = Deno.env.get("COMPANY_NAME") || "";
+  const companyEmail = Deno.env.get("COMPANY_EMAIL") || "";
   const footerSetup = {
     facebookUrl: Deno.env.get("FACEBOOK_URL") || "",
     companyName: pageTitle,
   };
   const GA_ID = Deno.env.get("GOOGLE_ANALYTICS_TRACKING_ID") || "";
+
+  const companyInfo = {
+    companyName: pageTitle,
+    companyEmail: companyEmail,
+  }
 
   return (
     <html>
@@ -22,7 +28,7 @@ export default function App({ Component }: PageProps) {
       </Head>
       <body>
         <ConsentContextProvider>
-          <RootLayout gaTrackId={GA_ID}>
+          <RootLayout gaTrackId={GA_ID} companyInfo={ companyInfo }>
             <Component />
           </RootLayout>
         </ConsentContextProvider>

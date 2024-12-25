@@ -7,9 +7,13 @@ import CookiePopup from "./CookiePopup.tsx";
 type RootLayoutProps = {
     children: h.JSX.Element;
     gaTrackId: string;
+    companyInfo: {
+        companyName: string;
+        companyEmail: string;
+    }
 }
 
-export default function RootLayout({ children, gaTrackId }: RootLayoutProps) {
+export default function RootLayout({ children, gaTrackId, companyInfo }: RootLayoutProps) {
     const consent = useConsent();
 
     useEffect(() => {
@@ -39,7 +43,7 @@ export default function RootLayout({ children, gaTrackId }: RootLayoutProps) {
                 {children}
             </main>
             {!consent.value && (
-                <CookiePopup />
+                <CookiePopup companyInfo={companyInfo} />
             )}
         </div>
     )
