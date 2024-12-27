@@ -14,7 +14,7 @@ export default function LatestProjects(
   let data: Project[] = [];
 
   if (Array.isArray(projects.value.result) && projects.value.result.length !== 0) {
-    data = projects.value.result;
+    data = projects.value.result.slice(0, 6);
   }
 
   return (
