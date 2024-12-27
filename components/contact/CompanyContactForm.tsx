@@ -44,6 +44,11 @@ export default function CompanyContactForm(
       <h1 className="text-3xl font-semibold mb-8 text-center text-gray-800">
         Skontaktuj się z nami
       </h1>
+      <h2 className="text-lg mt-4 mb-8 text-center text-gray-800">
+        Podaj nam swoje dane kontaktowe oraz informacje o projekcie, nad którym
+        chcesz, abyśmy pracowali, a my skontaktujemy się z Tobą w celu omówienia
+        szczegółów.
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <h2 className="text-xl font-semibold mb-4">Dane kontaktowe</h2>
@@ -52,7 +57,7 @@ export default function CompanyContactForm(
               htmlFor="name"
               className="block text-base font-medium text-gray-700"
             >
-              Twoje imię
+              Twoje imię i nazwisko
             </label>
             <input
               type="text"
@@ -63,6 +68,9 @@ export default function CompanyContactForm(
               required
               className="mt-2 p-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500
               focus:ring-indigo-500 sm:text-lg bg-gray-50"
+              pattern="[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ ]{2,}"
+              minLength={2}
+              maxLength={50}
             />
           </div>
           <div className="mb-6">
@@ -94,6 +102,8 @@ export default function CompanyContactForm(
               type="tel"
               id="phone"
               name="phone"
+              pattern="\+?[0-9\s\-]{9,15}"
+              placeholder="np. +48 123 456 789"
               value={formData.phone}
               onChange={handleChange}
               className="mt-2 p-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500
@@ -133,8 +143,12 @@ export default function CompanyContactForm(
               value={formData.message}
               onChange={handleChange}
               required
+              pattern="[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s\.\,\!\?\-\(\)]{10,}"
+              minLength={10}
+              maxLength={1000}
+              placeholder={"Opisz nam swój projekt..."}
               className="mt-2 p-2 block w-full min-h-[100px] sm:min-h-[200px] md:min-h-[300px]
-              lg:min-h-[350px] rounded-lg border-gray-300 shadow-sm focus:border-indigo-500
+              lg:min-h-[320px] rounded-lg border-gray-300 shadow-sm focus:border-indigo-500
               focus:ring-indigo-500 sm:text-lg bg-gray-50"
             />
           </div>
@@ -152,10 +166,13 @@ export default function CompanyContactForm(
               type="number"
               id="detailsSquareMeters"
               name="detailsSquareMeters"
+              pattern={"[0-9]{1,}"}
               className="mt-2 p-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500
               focus:ring-indigo-500 sm:text-lg bg-gray-50"
               value={formData.detailsSquareMeters}
               onChange={handleChange}
+              step="0.01"
+              min="0"
             />
           </div>
           <div className="mb-6">
@@ -163,12 +180,16 @@ export default function CompanyContactForm(
               htmlFor="detailsBuildingType"
               className="block text-base font-medium text-gray-700"
             >
-              Rodzaj budynku (np. dom jednorodzinny, blok mieszkalny)
+              Rodzaj budynku
             </label>
             <input
               type="text"
               id="detailsBuildingType"
               name="detailsBuildingType"
+              pattern={"[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\\s\\-\\,]{2,}"}
+              minLength={2}
+              maxLength={70}
+              placeholder={"np. dom jednorodzinny, blok mieszkalny"}
               className="mt-2 p-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500
                focus:ring-indigo-500 sm:text-lg bg-gray-50"
               value={formData.detailsBuildingType}
@@ -186,6 +207,10 @@ export default function CompanyContactForm(
               type="text"
               id="detailsBuildingAge"
               name="detailsBuildingAge"
+              pattern={"[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\\s\\-\\,]{1,}"}
+              minLength={1}
+              maxLength={70}
+              placeholder={"np. 10 lat lub rok budowy"}
               className="mt-2 p-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500
               focus:ring-indigo-500 sm:text-lg bg-gray-50"
               value={formData.detailsBuildingAge}
@@ -203,10 +228,13 @@ export default function CompanyContactForm(
               type="number"
               id="detailsBuildingFloor"
               name="detailsBuildingFloor"
+              pattern={"[0-9]{1,}"}
               className="mt-2 p-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500
               focus:ring-indigo-500 sm:text-lg bg-gray-50"
               value={formData.detailsBuildingFloor}
               onChange={handleChange}
+              min="0"
+              max="100"
             />
           </div>
           <div className="mb-6">
@@ -220,10 +248,13 @@ export default function CompanyContactForm(
               type="number"
               id="detailsRooms"
               name="detailsRooms"
+              pattern={"[0-9]{1,}"}
               className="mt-2 p-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500
               focus:ring-indigo-500 sm:text-lg bg-gray-50"
               value={formData.detailsRooms}
               onChange={handleChange}
+              min="0"
+              max="100"
             />
           </div>
           <div className="mb-6">
@@ -315,8 +346,7 @@ export default function CompanyContactForm(
         <div className="mt-6 text-green-600 text-center">
           <Popup onClose={handlePopup}>
             <p>
-              Wiadomość wysłana! Pracujemy nad tym, aby jak najszybciej Tobie
-              odpowiedzieć.
+              Wiadomość wysłana! Proszę czekać na odpowiedź.
             </p>
           </Popup>
         </div>

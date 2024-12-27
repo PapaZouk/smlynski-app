@@ -121,7 +121,7 @@ export default function CompanyContact(
         detailsMediaWater: false,
         message: "",
       });
-    }, 2000);
+    }, 4000);
   };
 
   return (

@@ -63,7 +63,7 @@ async function EmailClient({ request, clientConfig }: EmailClientProps) {
       email: email,
       phone: phone,
       preferredContactMethod: preferredContactMethod
-        ? preferredContactMethod
+        ? preferredContactMethod === "phone" ? "Telefon" : "Email"
         : "Brak",
       squareMeters: detailsSquareMeters,
       buildingType: detailsBuildingType,
