@@ -11,6 +11,7 @@ import * as $offer from "./routes/offer.tsx";
 import * as $offer_id_ from "./routes/offer/[id].tsx";
 import * as $project_id_ from "./routes/project/[id].tsx";
 import * as $projects from "./routes/projects.tsx";
+import * as $About from "./islands/About.tsx";
 import * as $CompanyContact from "./islands/CompanyContact.tsx";
 import * as $CompanyContactMap from "./islands/CompanyContactMap.tsx";
 import * as $ConsentProvider from "./islands/ConsentProvider.tsx";
@@ -40,6 +41,7 @@ const manifest = {
     "./routes/projects.tsx": $projects,
   },
   islands: {
+    "./islands/About.tsx": $About,
     "./islands/CompanyContact.tsx": $CompanyContact,
     "./islands/CompanyContactMap.tsx": $CompanyContactMap,
     "./islands/ConsentProvider.tsx": $ConsentProvider,

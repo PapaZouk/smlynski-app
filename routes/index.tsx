@@ -20,7 +20,7 @@ export default async function Home() {
     <div>
       <HeroHeader />
       <LatestProjects initialProjects={initialProjects} />
-      <Feedbacks initialFeedbacks={initialFeedbacks} />
+      <Feedbacks initialFeedbacks={initialFeedbacks} headerContent={"Opinie naszych klientów"}/>
     </div>
   );
 }
