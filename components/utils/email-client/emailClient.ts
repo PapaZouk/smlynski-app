@@ -5,6 +5,16 @@ type EmailClientProps = {
     from: string;
     email: string;
     phone: string;
+    preferredContactMethod?: string;
+    detailsSquareMeters: number;
+    detailsBuildingType: string;
+    detailsBuildingAge: string;
+    detailsBuildingFloor?: number;
+    detailsRooms?: number;
+    detailsLift: boolean;
+    detailsPreferredStartDate: string;
+    detailsMediaElectricity: boolean;
+    detailsMediaWater: boolean;
     message: string;
   };
   clientConfig: {
@@ -23,7 +33,22 @@ async function EmailClient({ request, clientConfig }: EmailClientProps) {
       publicKey: clientConfig.publicKey,
     };
 
-    const { from, email, phone, message } = request;
+    const {
+      from,
+      email,
+      phone,
+      preferredContactMethod,
+      detailsSquareMeters,
+      detailsBuildingType,
+      detailsBuildingAge,
+      detailsBuildingFloor,
+      detailsRooms,
+      detailsLift,
+      detailsPreferredStartDate,
+      detailsMediaElectricity,
+      detailsMediaWater,
+      message,
+    } = request;
 
     emailjs.init({
       publicKey: options.publicKey,
@@ -37,13 +62,27 @@ async function EmailClient({ request, clientConfig }: EmailClientProps) {
       from_name: from,
       email: email,
       phone: phone,
+      preferredContactMethod: preferredContactMethod
+        ? preferredContactMethod
+        : "Brak",
+      squareMeters: detailsSquareMeters,
+      buildingType: detailsBuildingType,
+      buildingAge: detailsBuildingAge,
+      buildingFloor: detailsBuildingFloor,
+      rooms: detailsRooms,
+      lift: detailsLift ? "Tak" : "Nie",
+      preferredStartDate: detailsPreferredStartDate !== ""
+        ? detailsPreferredStartDate
+        : "Nieokreślona",
+      mediaElectricity: detailsMediaElectricity ? "Tak" : "Nie",
+      mediaWater: detailsMediaWater ? "Tak" : "Nie",
       message: message,
     };
 
     return await emailjs.send(
-        serviceID,
-        templateID,
-        templateParams,
+      serviceID,
+      templateID,
+      templateParams,
     );
   } catch (error) {
     console.error("EmailClient error:", error);

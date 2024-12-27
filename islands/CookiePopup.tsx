@@ -14,7 +14,7 @@ export default function CookiePopup({ companyInfo }: CookiePopupProps) {
   const consent = useConsent();
 
   const handleAccept = (): void => {
-    globalThis.document.cookie = "cookie-consent=true; max-age=31536000";
+    globalThis.document.cookie = "cookie-consent=true; max-age=360000";
     consent.value = true;
   };
 

@@ -26,10 +26,18 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 p-12" style={{ marginBottom: "150px" }}>
-      <CompanyContactAddress companyAddress={initialCompanyAddress} />
-      <CompanyContact emailClientConfig={emailClientConfig} />
-      <CompanyContactMap googleMap={mapProps} />
+    <div className="p-12" style={{ marginBottom: "150px" }}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="md:col-span-1">
+          <CompanyContactAddress companyAddress={initialCompanyAddress} />
+        </div>
+        <div className="md:col-span-2">
+          <CompanyContact emailClientConfig={emailClientConfig} />
+        </div>
+      </div>
+      <div className="mt-6">
+        <CompanyContactMap googleMap={mapProps} />
+      </div>
     </div>
   );
 }
