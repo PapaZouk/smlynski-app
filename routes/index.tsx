@@ -12,13 +12,15 @@ clearCache();
 export default async function Home() {
   const cacheTimeout: string | undefined = Deno.env.get("CACHE_EXPIRY_VALUE") ||
     "3600000";
+  const companyName = Deno.env.get("COMPANY_NAME") || "Company Name";
+  const companySubtitle = Deno.env.get("COMPANY_SUBTITLE") || null;
 
   const initialFeedbacks = await getAllFeedbacks(cacheTimeout);
   const initialProjects = await getAllProjects(cacheTimeout);
 
   return (
     <div>
-      <HeroHeader />
+      <HeroHeader companyName={companyName} companySubtitle={companySubtitle} />
       <LatestProjects initialProjects={initialProjects} />
       <Feedbacks initialFeedbacks={initialFeedbacks} headerContent={"Opinie naszych klientów"}/>
     </div>
