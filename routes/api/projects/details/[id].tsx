@@ -1,6 +1,6 @@
 import { PageProps } from "$fresh/server.ts";
-import { isValidRequestOrigin } from "../../utils/isValidRequestOrigin.ts";
-import { formatRouteParam } from "../../utils/formatRouteParam.ts";
+import { isValidRequestOrigin } from "../../../../components/utils/isValidRequestOrigin.ts";
+import { formatRouteParam } from "../../../../components/utils/formatRouteParam.ts";
 import { getProjectById } from "../../../../components/utils/api-client/clientApi.tsx";
 
 export const handler = async (req: Request, props: PageProps) => {

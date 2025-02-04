@@ -1,4 +1,4 @@
-import { isValidRequestOrigin } from "../utils/isValidRequestOrigin.ts";
+import { isValidRequestOrigin } from "../../../components/utils/isValidRequestOrigin.ts";
 import { getAllProjects } from "../../../components/utils/api-client/clientApi.tsx";
 
 export const handler = async (req: Request) => {
