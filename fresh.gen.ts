@@ -5,6 +5,13 @@
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $about from "./routes/about.tsx";
+import * as $api_feedbacks_all from "./routes/api/feedbacks/all.tsx";
+import * as $api_offers_all from "./routes/api/offers/all.tsx";
+import * as $api_offers_details_id_ from "./routes/api/offers/details/[id].tsx";
+import * as $api_projects_all from "./routes/api/projects/all.tsx";
+import * as $api_projects_details_id_ from "./routes/api/projects/details/[id].tsx";
+import * as $api_utils_formatRouteParam from "./routes/api/utils/formatRouteParam.ts";
+import * as $api_utils_isValidRequestOrigin from "./routes/api/utils/isValidRequestOrigin.ts";
 import * as $contact from "./routes/contact.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $offer from "./routes/offer.tsx";
@@ -33,6 +40,14 @@ const manifest = {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
     "./routes/about.tsx": $about,
+    "./routes/api/feedbacks/all.tsx": $api_feedbacks_all,
+    "./routes/api/offers/all.tsx": $api_offers_all,
+    "./routes/api/offers/details/[id].tsx": $api_offers_details_id_,
+    "./routes/api/projects/all.tsx": $api_projects_all,
+    "./routes/api/projects/details/[id].tsx": $api_projects_details_id_,
+    "./routes/api/utils/formatRouteParam.ts": $api_utils_formatRouteParam,
+    "./routes/api/utils/isValidRequestOrigin.ts":
+      $api_utils_isValidRequestOrigin,
     "./routes/contact.tsx": $contact,
     "./routes/index.tsx": $index,
     "./routes/offer.tsx": $offer,

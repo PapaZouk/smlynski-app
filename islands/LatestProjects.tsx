@@ -1,20 +1,45 @@
-import { useSignal, Signal } from "@preact/signals";
+import { useEffect, useState } from "preact/hooks";
 import ProjectTile from "../components/ProjectTile.tsx";
 import { Project } from "../components/utils/api-client/types/Project.ts";
+import Loading from "../components/loader/Loading.tsx";
 
-type LatestProjectsProps = {
-  initialProjects: Project[];
-};
+export default function LatestProjects() {
+  const [projects, setProjects] = useState<Project[]>([]);
 
-export default function LatestProjects(
-  { initialProjects }: LatestProjectsProps,
-) {
-  const projects: Signal = useSignal<Project[]>(initialProjects);
+  useEffect(() => {
+    async function fetchProjects() {
+      const response = await fetch("/api/projects/all", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        console.error("Failed to fetch projects");
+        return;
+      }
+
+      const responseBody = await response.json();
+      const projects = responseBody.result;
+      setProjects(projects);
+    }
+
+    if (!projects || projects.length === 0) {
+      fetchProjects();
+    }
+  }, []);
 
   let data: Project[] = [];
 
-  if (Array.isArray(projects.value.result) && projects.value.result.length !== 0) {
-    data = projects.value.result.slice(0, 6);
+  if (
+    Array.isArray(projects) && projects.length !== 0
+  ) {
+    data = projects.slice(0, 6);
+  }
+
+  if (!projects || projects.length === 0) {
+    return <Loading />;
   }
 
   return (
