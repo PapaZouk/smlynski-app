@@ -7,7 +7,7 @@ type FooterProps = {
 
 export default function Footer({ footerSetup }: FooterProps) {
     return (
-        <footer class="bg-gray-800 text-white py-4 fixed bottom-0 w-full">
+        <footer class="bg-gray-800 text-white py-4 bottom-0 w-full">
             <div class="container mx-auto px-4">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <div class="mb-2 md:mb-0">

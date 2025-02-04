@@ -6,6 +6,7 @@ import {ConsentContextProvider} from "../islands/ConsentProvider.tsx";
 
 export default function App({ Component }: PageProps) {
   const pageTitle = Deno.env.get("COMPANY_NAME") || "";
+  const pageSubtitle = Deno.env.get("COMPANY_SUBTITLE") || "";
   const companyEmail = Deno.env.get("COMPANY_EMAIL") || "";
   const footerSetup = {
     facebookUrl: Deno.env.get("FACEBOOK_URL") || "",
@@ -23,7 +24,7 @@ export default function App({ Component }: PageProps) {
       <Head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{pageTitle}</title>
+        <title>{pageTitle}{pageSubtitle && ` - ${pageSubtitle}`}</title>
         <link rel="stylesheet" href="/styles.css" />
       </Head>
       <body>
