@@ -18,12 +18,7 @@ export const handler = async (req: Request) => {
 
   try {
     const feedbacks = await getAllFeedbacks(cacheTimeout);
-    return new Response(JSON.stringify(feedbacks), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return new Response(JSON.stringify(feedbacks), { status: 200 });
   } catch (_error) {
     return new Response(
       "Error fetching feedbacks",

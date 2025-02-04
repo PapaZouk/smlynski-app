@@ -31,12 +31,7 @@ export const handler = async (req: Request, props: PageProps) => {
     const cacheTimeout: string | undefined = Deno.env.get("CACHE_TIMEOUT") ||
       "3600";
     const offer = await getOfferById(id, cacheTimeout);
-    return new Response(JSON.stringify(offer), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return new Response(JSON.stringify(offer), { status: 200 });
   } catch (_error) {
     console.log("Failed to fetch offer details");
     return new Response(

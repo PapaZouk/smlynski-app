@@ -31,12 +31,7 @@ export const handler = async (req: Request, props: PageProps) => {
       Deno.env.get("CACHE_EXPIRY_VALUE") ||
       "3600";
     const project = await getProjectById(id, cacheTimeout);
-    return new Response(JSON.stringify(project), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return new Response(JSON.stringify(project), { status: 200 });
   } catch (_error) {
     console.log("Failed to fetch project details");
     return new Response(

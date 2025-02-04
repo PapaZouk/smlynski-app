@@ -14,15 +14,11 @@ export const handler = async (req: Request) => {
   }
 
   try {
-    const cacheTimeout: string | undefined = Deno.env.get("CACHE_EXPIRY_VALUE") ||
-        "3600";
+    const cacheTimeout: string | undefined =
+      Deno.env.get("CACHE_EXPIRY_VALUE") ||
+      "3600";
     const projects = await getAllProjects(cacheTimeout);
-    return new Response(JSON.stringify(projects), {
-      status: 200,
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    return new Response(JSON.stringify(projects), { status: 200 });
   } catch (_error) {
     console.log("Error fetching projects");
     return new Response("Error fetching projects", { status: 500 });

@@ -6,9 +6,9 @@ export const handler = async (req: Request) => {
   if (!isValidRequestOrigin(req)) {
     return new Response(null, {
       status: 302,
-        headers: {
-            location: "/",
-        },
+      headers: {
+        location: "/",
+      },
     });
   }
 
@@ -17,11 +17,7 @@ export const handler = async (req: Request) => {
 
   try {
     const initialOffers = await getAllOffers(cacheTimeout);
-    return new Response(JSON.stringify(initialOffers), {
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    return new Response(JSON.stringify(initialOffers), { status: 200 });
   } catch (_error) {
     console.log("Error fetching offers");
     return new Response("Error fetching offers", { status: 500 });
