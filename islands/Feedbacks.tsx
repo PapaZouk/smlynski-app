@@ -1,43 +1,71 @@
-import { Signal, useSignal } from "@preact/signals";
-import { useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import FeedbackTile from "../components/FeedbackTile.tsx";
 import { Feedback } from "../components/utils/api-client/types/Feedback.ts";
+import Loading from "../components/loader/Loading.tsx";
 
 type FeedbacksProps = {
-  initialFeedbacks: Feedback[];
   headerContent: string;
   subHeaderContent?: string;
 };
 
 export default function Feedbacks(
-  { initialFeedbacks, headerContent, subHeaderContent }: FeedbacksProps,
+  { headerContent, subHeaderContent }: FeedbacksProps,
 ) {
-  const feedbacks: Signal = useSignal(initialFeedbacks);
-  const currentIndex: Signal<number> = useSignal(0);
+  const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   useEffect(() => {
-    if (feedbacks.value.result.length > 3) {
+    async function fetchFeedbacks() {
+      const response = await fetch("/api/feedbacks/all", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        console.error("Failed to fetch feedbacks");
+        return;
+      }
+
+      const responseBody = await response.json();
+      const feedbacksResult = responseBody.result;
+      setFeedbacks(feedbacksResult);
+    }
+
+    if (!feedbacks || feedbacks.length === 0) {
+      fetchFeedbacks();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (feedbacks.length > 3) {
       const interval = setInterval(() => {
-        currentIndex.value = (currentIndex.value + 1) %
-          feedbacks.value.result.length;
+        setCurrentIndex((currentIndex) =>
+          (currentIndex + 1) % feedbacks.length
+        );
       }, 7000);
 
       return () => clearInterval(interval);
     }
-  }, [feedbacks.value.result.length]);
+  }, [feedbacks.length]);
 
-  const displayedFeedbacks = feedbacks.value.result.length > 3
+  const displayedFeedbacks = feedbacks.length > 3
     ? [
-      ...feedbacks.value.result.slice(
-        currentIndex.value,
-        currentIndex.value + 3,
+      ...feedbacks.slice(
+        currentIndex,
+        currentIndex + 3,
       ),
-      ...feedbacks.value.result.slice(
+      ...feedbacks.slice(
         0,
-        Math.max(0, 3 - (feedbacks.value.result.length - currentIndex.value)),
+        Math.max(0, 3 - (feedbacks.length - currentIndex)),
       ),
     ]
-    : feedbacks.value.result;
+    : feedbacks;
+
+  if (!feedbacks || feedbacks.length === 0) {
+    return <Loading />;
+  }
 
   return (
     <div
@@ -48,9 +76,9 @@ export default function Feedbacks(
         {headerContent}
       </h1>
       {subHeaderContent && (
-          <h2 className="text-xl mb-10 mx-4 sm:mx-8 md:mx-20 px-4 sm:px-8 md:px-16 text-center text-white">
-            {subHeaderContent}
-          </h2>
+        <h2 className="text-xl mb-10 mx-4 sm:mx-8 md:mx-20 px-4 sm:px-8 md:px-16 text-center text-white">
+          {subHeaderContent}
+        </h2>
       )}
       <div className="relative">
         <div className="flex flex-col md:flex-row gap-8 justify-center transition-transform duration-500 ease-in-out">

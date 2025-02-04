@@ -1,17 +1,55 @@
-import { Signal, useSignal } from "@preact/signals";
-import { useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { Project } from "../components/utils/api-client/types/Project.ts";
 import { fromByteArray } from "npm:base64-js";
 import ProjectTile from "../components/ProjectTile.tsx";
+import Loading from "../components/loader/Loading.tsx";
 
-type ProjectsProps = {
-  initialProjects: Project[];
-};
+export default function Projects() {
+  const [initialProjects, setInitialProjects] = useState<Project[]>([]);
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-export default function Projects({ initialProjects }: ProjectsProps) {
   const PROJECTS_PER_PAGE = 4;
-  const currentSlide: Signal = useSignal<number>(0);
-  const currentPage: Signal = useSignal<number>(1);
+  const indexOfLastProject = currentPage * PROJECTS_PER_PAGE;
+  const indexOfFirstProject = indexOfLastProject - PROJECTS_PER_PAGE;
+  const totalPages = initialProjects
+    ? Math.ceil(initialProjects.length / PROJECTS_PER_PAGE)
+    : 0;
+  const currentProjects = initialProjects?.slice(
+    indexOfFirstProject,
+    indexOfLastProject,
+  );
+
+  useEffect(() => {
+    async function fetchProjects() {
+      const response = await fetch("/api/projects/all", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        return;
+      }
+
+      const responseBody = await response.json();
+      const projectsResult = responseBody.result;
+
+      if (!projectsResult) {
+        return;
+      }
+
+      const sortedProjects = projectsResult.sort((a: Project, b: Project) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+      setInitialProjects(sortedProjects);
+    }
+
+    if (!initialProjects || initialProjects.length === 0) {
+      fetchProjects();
+    }
+  }, []);
 
   const slideImages = initialProjects.map((project: Project) => {
     return `data:${project.images[0].contentType};base64,${
@@ -23,24 +61,18 @@ export default function Projects({ initialProjects }: ProjectsProps) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      currentSlide.value = (currentSlide.value + 1) % slideImages.length;
+      setCurrentSlide((currentSlide + 1) % slideImages.length);
     }, 5000);
     return () => clearInterval(interval);
   }, [currentSlide, slideImages.length]);
 
   const handlePageChange = (page: number) => {
-    currentPage.value = page;
+    setCurrentPage(page);
   };
 
-  const indexOfLastProject = currentPage.value * PROJECTS_PER_PAGE;
-  const indexOfFirstProject = indexOfLastProject - PROJECTS_PER_PAGE;
-  const totalPages = initialProjects
-    ? Math.ceil(initialProjects.length / PROJECTS_PER_PAGE)
-    : 0;
-  const currentProjects = initialProjects?.slice(
-    indexOfFirstProject,
-    indexOfLastProject,
-  );
+  if (!initialProjects || initialProjects.length === 0) {
+    return <Loading />;
+  }
 
   return (
     <div className="mb-52 sm:mb-40">
@@ -53,7 +85,7 @@ export default function Projects({ initialProjects }: ProjectsProps) {
                 src={src}
                 alt="Hero Slide"
                 className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-10000 ease-in-out ${
-                  currentSlide.value === index ? "opacity-100" : "opacity-0"
+                  currentSlide === index ? "opacity-100" : "opacity-0"
                 }`}
               />
             ))}
@@ -93,7 +125,7 @@ export default function Projects({ initialProjects }: ProjectsProps) {
               key={index}
               onClick={() => handlePageChange(index + 1)}
               className={`mx-1 px-3 py-1 rounded mt-2 ${
-                currentPage.value === index + 1
+                currentPage === index + 1
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 text-gray-700"
               }`}
@@ -109,7 +141,7 @@ export default function Projects({ initialProjects }: ProjectsProps) {
               key={index}
               onClick={() => handlePageChange(index + 1)}
               className={`mx-1 px-3 py-1 rounded mt-2 ${
-                currentPage.value === index + 1
+                currentPage === index + 1
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 text-gray-700"
               }`}
