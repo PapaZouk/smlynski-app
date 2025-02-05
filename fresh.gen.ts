@@ -19,7 +19,6 @@ import * as $projects from "./routes/projects.tsx";
 import * as $About from "./islands/About.tsx";
 import * as $CompanyContact from "./islands/CompanyContact.tsx";
 import * as $CompanyContactMap from "./islands/CompanyContactMap.tsx";
-import * as $ConsentProvider from "./islands/ConsentProvider.tsx";
 import * as $CookiePopup from "./islands/CookiePopup.tsx";
 import * as $Feedbacks from "./islands/Feedbacks.tsx";
 import * as $Footer from "./islands/Footer.tsx";
@@ -31,6 +30,7 @@ import * as $Offers from "./islands/Offers.tsx";
 import * as $ProjectDetails from "./islands/ProjectDetails.tsx";
 import * as $Projects from "./islands/Projects.tsx";
 import * as $RootLayout from "./islands/RootLayout.tsx";
+import * as $main_PageContent from "./islands/main/PageContent.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -54,7 +54,6 @@ const manifest = {
     "./islands/About.tsx": $About,
     "./islands/CompanyContact.tsx": $CompanyContact,
     "./islands/CompanyContactMap.tsx": $CompanyContactMap,
-    "./islands/ConsentProvider.tsx": $ConsentProvider,
     "./islands/CookiePopup.tsx": $CookiePopup,
     "./islands/Feedbacks.tsx": $Feedbacks,
     "./islands/Footer.tsx": $Footer,
@@ -66,6 +65,7 @@ const manifest = {
     "./islands/ProjectDetails.tsx": $ProjectDetails,
     "./islands/Projects.tsx": $Projects,
     "./islands/RootLayout.tsx": $RootLayout,
+    "./islands/main/PageContent.tsx": $main_PageContent,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

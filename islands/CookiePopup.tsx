@@ -1,5 +1,5 @@
 import { Signal, useSignal } from "@preact/signals";
-import { useConsent } from "./ConsentProvider.tsx";
+import {useConsent} from "../components/context/ConsentProvider.tsx";
 
 type CookiePopupProps = {
   companyInfo: {
@@ -11,21 +11,22 @@ type CookiePopupProps = {
 export default function CookiePopup({ companyInfo }: CookiePopupProps) {
   const showPopup: Signal<boolean> = useSignal(true);
   const extendedPolicy: Signal<boolean> = useSignal(false);
-  const consent = useConsent();
+  const {hasConsent, setConsent} = useConsent();
 
   const handleAccept = (): void => {
-    globalThis.document.cookie = "cookie-consent=true; max-age=360000";
-    consent.value = true;
+    globalThis.document.cookie = "cookie-consent=true; max-age=31536000; Secure; SameSite=Lax;";
+    setConsent(true);
   };
 
   const handleReject = (): void => {
-    consent.value = false;
+    setConsent(false);
+    globalThis.document.cookie = "cookie-consent=false; max-age=15552000; Secure; SameSite=Lax;";
     showPopup.value = false;
   };
 
   return (
     <>
-      {showPopup.value && (
+      {showPopup.value && !hasConsent() && (
         <div class="fixed bottom-60 sm:bottom-50 left-5 right-5 max-w-3xl mx-auto bg-gray-800 bg-opacity-80 text-center
                      text-white p-4 sm:p-10 rounded-lg flex flex-wrap gap-5 justify-center items-center z-50
                      md:bottom-[20%] md:left-20 md:right-20">
