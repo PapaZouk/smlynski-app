@@ -1,7 +1,7 @@
 import { type PageProps } from "$fresh/server.ts";
-import RootLayout from "../islands/RootLayout.tsx";
+import RootLayout from "../islands/layout/RootLayout.tsx";
 import { Head } from "$fresh/src/runtime/head.ts";
-import Footer from "../islands/Footer.tsx";
+import Footer from "../islands/layout/Footer.tsx";
 import { ConsentProvider } from "../components/context/ConsentProvider.tsx";
 import PageHead from "../components/header/PageHead.tsx";
 

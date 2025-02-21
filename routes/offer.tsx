@@ -1,4 +1,4 @@
-import Offers from "../islands/Offers.tsx";
+import Offers from "../islands/pages/Offers.tsx";
 
 export default function OfferPage() {
   return <Offers />;

@@ -16,21 +16,21 @@ import * as $offer from "./routes/offer.tsx";
 import * as $offer_id_ from "./routes/offer/[id].tsx";
 import * as $project_id_ from "./routes/project/[id].tsx";
 import * as $projects from "./routes/projects.tsx";
-import * as $About from "./islands/About.tsx";
-import * as $CompanyContact from "./islands/CompanyContact.tsx";
-import * as $CompanyContactMap from "./islands/CompanyContactMap.tsx";
-import * as $CookiePopup from "./islands/CookiePopup.tsx";
-import * as $Feedbacks from "./islands/Feedbacks.tsx";
-import * as $Footer from "./islands/Footer.tsx";
-import * as $HeroHeader from "./islands/HeroHeader.tsx";
-import * as $LatestProjects from "./islands/LatestProjects.tsx";
-import * as $MainNavigation from "./islands/MainNavigation.tsx";
-import * as $OfferDetails from "./islands/OfferDetails.tsx";
-import * as $Offers from "./islands/Offers.tsx";
-import * as $ProjectDetails from "./islands/ProjectDetails.tsx";
-import * as $Projects from "./islands/Projects.tsx";
-import * as $RootLayout from "./islands/RootLayout.tsx";
+import * as $layout_Footer from "./islands/layout/Footer.tsx";
+import * as $layout_HeroHeader from "./islands/layout/HeroHeader.tsx";
+import * as $layout_MainNavigation from "./islands/layout/MainNavigation.tsx";
+import * as $layout_RootLayout from "./islands/layout/RootLayout.tsx";
 import * as $main_PageContent from "./islands/main/PageContent.tsx";
+import * as $pages_About from "./islands/pages/About.tsx";
+import * as $pages_CompanyContact from "./islands/pages/CompanyContact.tsx";
+import * as $pages_CompanyContactMap from "./islands/pages/CompanyContactMap.tsx";
+import * as $pages_Feedbacks from "./islands/pages/Feedbacks.tsx";
+import * as $pages_LatestProjects from "./islands/pages/LatestProjects.tsx";
+import * as $pages_OfferDetails from "./islands/pages/OfferDetails.tsx";
+import * as $pages_Offers from "./islands/pages/Offers.tsx";
+import * as $pages_ProjectDetails from "./islands/pages/ProjectDetails.tsx";
+import * as $pages_Projects from "./islands/pages/Projects.tsx";
+import * as $popup_CookiePopup from "./islands/popup/CookiePopup.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -51,21 +51,21 @@ const manifest = {
     "./routes/projects.tsx": $projects,
   },
   islands: {
-    "./islands/About.tsx": $About,
-    "./islands/CompanyContact.tsx": $CompanyContact,
-    "./islands/CompanyContactMap.tsx": $CompanyContactMap,
-    "./islands/CookiePopup.tsx": $CookiePopup,
-    "./islands/Feedbacks.tsx": $Feedbacks,
-    "./islands/Footer.tsx": $Footer,
-    "./islands/HeroHeader.tsx": $HeroHeader,
-    "./islands/LatestProjects.tsx": $LatestProjects,
-    "./islands/MainNavigation.tsx": $MainNavigation,
-    "./islands/OfferDetails.tsx": $OfferDetails,
-    "./islands/Offers.tsx": $Offers,
-    "./islands/ProjectDetails.tsx": $ProjectDetails,
-    "./islands/Projects.tsx": $Projects,
-    "./islands/RootLayout.tsx": $RootLayout,
+    "./islands/layout/Footer.tsx": $layout_Footer,
+    "./islands/layout/HeroHeader.tsx": $layout_HeroHeader,
+    "./islands/layout/MainNavigation.tsx": $layout_MainNavigation,
+    "./islands/layout/RootLayout.tsx": $layout_RootLayout,
     "./islands/main/PageContent.tsx": $main_PageContent,
+    "./islands/pages/About.tsx": $pages_About,
+    "./islands/pages/CompanyContact.tsx": $pages_CompanyContact,
+    "./islands/pages/CompanyContactMap.tsx": $pages_CompanyContactMap,
+    "./islands/pages/Feedbacks.tsx": $pages_Feedbacks,
+    "./islands/pages/LatestProjects.tsx": $pages_LatestProjects,
+    "./islands/pages/OfferDetails.tsx": $pages_OfferDetails,
+    "./islands/pages/Offers.tsx": $pages_Offers,
+    "./islands/pages/ProjectDetails.tsx": $pages_ProjectDetails,
+    "./islands/pages/Projects.tsx": $pages_Projects,
+    "./islands/popup/CookiePopup.tsx": $popup_CookiePopup,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

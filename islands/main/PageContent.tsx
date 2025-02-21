@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
-import MainNavigation from "../MainNavigation.tsx";
-import CookiePopup from "../CookiePopup.tsx";
+import MainNavigation from "../layout/MainNavigation.tsx";
+import CookiePopup from "../popup/CookiePopup.tsx";
 import { useConsent } from "../../components/context/ConsentProvider.tsx";
 
 type PageContentProps = {

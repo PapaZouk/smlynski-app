@@ -1,5 +1,5 @@
 import {PageProps} from "$fresh/server.ts";
-import ProjectDetails from "../../islands/ProjectDetails.tsx";
+import ProjectDetails from "../../islands/pages/ProjectDetails.tsx";
 
 export default function ProjectById(props: PageProps) {
     const id = new URL(props.url).pathname.split('/').filter(Boolean)[1];

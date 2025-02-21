@@ -1,6 +1,6 @@
 import { CompanyContactAddress } from "../components/contact/CompanyContactAddress.tsx";
-import CompanyContact from "../islands/CompanyContact.tsx";
-import CompanyContactMap from "../islands/CompanyContactMap.tsx";
+import CompanyContact from "../islands/pages/CompanyContact.tsx";
+import CompanyContactMap from "../islands/pages/CompanyContactMap.tsx";
 
 export default function ContactPage() {
   const initialCompanyAddress = {

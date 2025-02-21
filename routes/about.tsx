@@ -1,5 +1,5 @@
-import About from "../islands/About.tsx";
-import Feedbacks from "../islands/Feedbacks.tsx";
+import About from "../islands/pages/About.tsx";
+import Feedbacks from "../islands/pages/Feedbacks.tsx";
 
 export default function AboutPage() {
     return (
