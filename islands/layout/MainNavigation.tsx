@@ -126,7 +126,7 @@ export default function MainNavigation() {
             Strona główna
           </a>
           <a
-            href="/pages/About"
+            href="/about"
             className={getLinkClass("/about")}
             aria-current={currentPath === "/about" ? "page" : undefined}
             onClick={handleLinkClick}
@@ -134,7 +134,7 @@ export default function MainNavigation() {
             O nas
           </a>
           <a
-            href="/pages/Projects"
+            href="/projects"
             className={getLinkClass("/projects")}
             aria-current={currentPath === "/projects" ? "page" : undefined}
             onClick={handleLinkClick}
