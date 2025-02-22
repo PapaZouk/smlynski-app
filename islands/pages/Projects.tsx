@@ -30,6 +30,7 @@ export default function Projects() {
       });
 
       if (!response.ok) {
+        console.error("Failed to fetch projects");
         return;
       }
 
@@ -60,11 +61,13 @@ export default function Projects() {
   });
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((currentSlide + 1) % slideImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [currentSlide, slideImages.length]);
+    if (slideImages.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentSlide((currentSlide + 1) % slideImages.length);
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [currentSlide, slideImages]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
