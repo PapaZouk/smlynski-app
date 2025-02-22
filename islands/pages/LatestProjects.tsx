@@ -22,7 +22,11 @@ export default function LatestProjects() {
 
       const responseBody = await response.json();
       const projects = responseBody.result;
-      setProjects(projects);
+
+      const sortedProjects = projects.sort((a: Project, b: Project) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+      setProjects(sortedProjects);
     }
 
     if (!projects || projects.length === 0) {
