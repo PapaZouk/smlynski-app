@@ -90,6 +90,16 @@ export default function Projects() {
                 className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-10000 ease-in-out ${
                   currentSlide === index ? "opacity-100" : "opacity-0"
                 }`}
+                style={globalThis.window.innerWidth > 768
+                  ? {
+                    clipPath: "polygon(15% 0%, 90% 0%, 100% 90%, 0% 100%)",
+                    imageRendering: "crisp-edges",
+                    filter: "blur(8px)",
+                  }
+                  : {
+                    clipPath: "none",
+                    imageRendering: "auto",
+                  }}
               />
             ))}
             <div className="absolute inset-0 bg-black bg-opacity-35"></div>
