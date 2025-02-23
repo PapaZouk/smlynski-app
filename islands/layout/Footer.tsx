@@ -11,7 +11,9 @@ export default function Footer({ footerSetup }: FooterProps) {
             <div class="container mx-auto px-4">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <div class="mb-2 md:mb-0">
-                        <img src='/images/logo.png' alt="Logo" class="h-20 w-auto" />
+                        <a href="/">
+                            <img src='/images/logo.png' alt="Logo" class="h-20 w-auto"/>
+                        </a>
                     </div>
 
                     <div class="flex space-x-4 mb-2 md:mb-0">
