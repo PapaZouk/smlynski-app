@@ -23,16 +23,18 @@ export default function MainNavigation() {
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <img
-              className="h-10 w-auto"
-              src="/images/logo.png"
-              alt="Sebastian Młyński Usługi Remontowo-Budowlane"
-            />
+            <a href='/'>
+              <img
+                  className="h-10 w-auto"
+                  src="/images/logo.png"
+                  alt="Sebastian Młyński Usługi Remontowo-Budowlane"
+              />
+            </a>
           </div>
           <div className="flex items-center sm:hidden">
             <button
-              type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                type="button"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
               aria-expanded={isMenuOpen.value}
               onClick={handleMenuToggle}
