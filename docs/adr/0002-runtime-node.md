@@ -13,7 +13,7 @@ The old app ran on Deno and used Deno-specific conventions throughout: URL impor
 Migrate the runtime to **Node.js LTS** and remove Deno completely:
 
 - Pin the local/dev Node version via **`.nvmrc` = 24**; enforce **`engines.node >= 22`** in `package.json`.
-- Use **npm** with standard `package.json` scripts (`dev`, `build`, `lint`, `format`, `preview`, `check:assets`) instead of `deno task`.
+- Use **npm** with standard `package.json` scripts (`dev`, `build`, `lint`, `format`, `preview`, `check:assets` — since renamed to `check:content`, see ADR 0004 amendment) instead of `deno task`.
 - Use `process.env` / `NEXT_PUBLIC_*` environment variables instead of `Deno.env`.
 - Use ESLint 9 (`eslint-config-next` + `eslint-config-prettier`) and Prettier instead of `deno lint` / `deno fmt`.
 - Pin **TypeScript to 5.9.x** — latest stable with maximum tooling compatibility.

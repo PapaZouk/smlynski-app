@@ -10,7 +10,7 @@ The site is a marketing website with no server-side logic (contact form goes thr
 
 ## Decision
 
-- Build Next.js as a **fully static export**: `output: "export"` in `next.config.ts`. `npm run build` produces plain HTML/CSS/JS in `out/`, verified by `npm run check:assets` running first.
+- Build Next.js as a **fully static export**: `output: "export"` in `next.config.ts`. `npm run build` produces plain HTML/CSS/JS in `out/`, verified by `npm run check:assets` running first (since extended to `optimize:images && check:content`, see ADR 0004 amendment and ADR 0011).
 - Deploy via **Vercel's git integration only**: pushing to `master` triggers a production deploy. There is **no GitHub Actions CI at all** — a deliberate choice to rely on Vercel's build checks alone.
 - **Images are served unoptimized** (`images.unoptimized: true`) because the static export cannot run the Next.js image optimization server. The `<Media>` component centralizes this so the trade-off can be revisited in one place.
 - Metadata routes (`sitemap.ts`, `robots.ts`) declare `export const dynamic = "force-static"` so they are prerendered correctly under `output: "export"`.

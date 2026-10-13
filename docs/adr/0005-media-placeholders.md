@@ -25,3 +25,10 @@ The old app embedded API images as base64 buffers inside server-rendered HTML. W
 - Adding an image = drop the file under `public/images/...` and reference it in the content module; the build gate guarantees consistency.
 - Authors may preview unfinished entries with empty image arrays — the site renders branded placeholders.
 - The `images.unoptimized` trade-off from ADR 0003 is contained inside `Media.tsx`, so future changes happen in one place.
+
+## Amendment (enhancement batch, 2025)
+
+Two changes to the scheme above, both still consistent with its intent:
+
+- **The asset check moved into `scripts/check-content.mjs`** (ADR 0004 amendment). The referenced-file-exists rule is unchanged; it now runs alongside the broader content validation instead of as a standalone `check-assets.mjs`.
+- **`Media.tsx` (and `Lightbox.tsx`) now serve WebP via `<picture>`** when a build-generated variant exists — see **ADR 0011** for the pipeline. The placeholder behavior is untouched: empty/`null` still renders `placeholder.svg`, which being an SVG is never optimized.

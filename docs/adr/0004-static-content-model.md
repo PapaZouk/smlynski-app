@@ -31,3 +31,7 @@ Each module exports a typed array (types in `src/lib/types.ts`), and every tempo
 - No API keys, tokens, or network calls at build or run time.
 - Slugs in `projects.ts`/`offers.ts` drive the generated detail-page URLs (see ADR 0006).
 - Until the owner replaces the `PRZYKŁAD` entries, the site shows sample data.
+
+## Amendment (enhancement batch, 2025)
+
+The "TypeScript gives compile-time validation for free" claim above covers only the _shape_ of the data. A build-time validator now enforces what `tsc` cannot express: **`scripts/check-content.mjs`** (supersedes the old `check-assets.mjs`) runs before every build, imports the real content modules (Node ≥ 22.18 native type-stripping), and **fails the build** on: non-kebab-case or duplicate slugs, non-real or future `completedAt` dates, blank required fields, empty `details`, unique-violating feedback `id`s, non-`https`/trailing-slash `siteUrl`, duplicate nav hrefs, and any `/images/…` reference whose file is missing under `public/`. This closes the gap between "compiles" and "correct" for hand-edited content — see ADR 0014 for why this is a script rather than a test runner.
