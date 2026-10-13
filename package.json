@@ -4,18 +4,27 @@
   "private": true,
   "description": "Static marketing website for Sebastian Młyński — Usługi Remontowo-Budowlane",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   },
   "scripts": {
     "predev": "npm run optimize:images",
     "dev": "next dev",
-    "build": "npm run optimize:images && npm run check:assets && next build",
+    "build": "npm run optimize:images && npm run check:content && next build",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "check:assets": "node scripts/check-assets.mjs",
+    "check:content": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-content.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "preview": "npx serve out"
+    "preview": "npx serve out",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,json,css,md,mdx}": [
+      "prettier --write"
+    ],
+    "*.{ts,tsx,js,mjs}": [
+      "eslint --fix --max-warnings=0"
+    ]
   },
   "dependencies": {
     "@emailjs/browser": "^5.0.3",
@@ -34,6 +43,8 @@
     "eslint": "^9",
     "eslint-config-next": "^16.4.0",
     "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
     "prettier": "^3.6.2",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",

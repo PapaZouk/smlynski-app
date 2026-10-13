@@ -1,0 +1,3 @@
+# Format + lint only the files being committed (fast, no full-project run).
+# The full lint/build gate runs on Vercel; this catches trivial breakage early.
+npx lint-staged
