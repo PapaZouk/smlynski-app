@@ -88,6 +88,17 @@ export default function PrivacyPolicyPage() {
             internetowej. Narzędzia analityczne (Google Analytics) są uruchamiane
             wyłącznie po wyrażeniu zgody za pomocą banera cookie.
           </p>
+          <p className="mt-2">
+            Pełna lista wykorzystywanych plików cookie wraz z czasem ich przechowywania
+            znajduje się w{" "}
+            <a
+              href="/polityka-cookies"
+              className="text-gold-600 underline underline-offset-4"
+            >
+              polityce plików cookie
+            </a>
+            .
+          </p>
         </Section>
 
         <Section title="6. Podstawa prawna przetwarzania danych">

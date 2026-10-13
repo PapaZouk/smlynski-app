@@ -37,5 +37,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.2,
     },
+    {
+      url: absoluteUrl("/polityka-cookies"),
+      changeFrequency: "yearly" as const,
+      priority: 0.2,
+    },
   ];
 }

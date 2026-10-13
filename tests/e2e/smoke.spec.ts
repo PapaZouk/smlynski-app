@@ -208,6 +208,28 @@ test.describe("contact", () => {
     // International format, whitespace stripped.
     await expect(tel).toHaveAttribute("href", /^tel:\+48\d{9}$/);
   });
+
+  test("honeypot field is present, off-screen, and hidden from a11y", async ({
+    page,
+  }) => {
+    await page.goto("/contact");
+    const honeypot = page.locator("form input[name='website']");
+    await expect(honeypot).toHaveCount(1);
+    // Must be off-screen but NOT display:none (bots skip display:none traps).
+    const styles = await honeypot.evaluate((el) => {
+      const wrapper = el.closest("div[aria-hidden='true']");
+      const computed = wrapper ? getComputedStyle(wrapper) : null;
+      return {
+        display: computed?.display,
+        position: computed?.position,
+        left: computed?.left,
+      };
+    });
+    expect(styles.display).not.toBe("none");
+    expect(styles.position).toBe("absolute");
+    // Far off-screen to the left.
+    expect(parseInt(styles.left ?? "0", 10)).toBeLessThan(-1000);
+  });
 });
 
 test.describe("consent & analytics", () => {
@@ -246,26 +268,89 @@ test.describe("consent & analytics", () => {
     expect(cookie?.value).toBe("false");
   });
 
-  test("GA4 is absent before consent — always, no exceptions", async ({ page }) => {
+  test("GA4 is not injected at all when unconfigured (local builds)", async ({
+    page,
+  }) => {
     await page.goto("/");
+    // NEXT_PUBLIC_GA_ID unset => no gtag scripts, nothing to consent to.
     const gaCount = await page.evaluate(
       () => document.querySelectorAll("script[src*='googletagmanager']").length,
     );
     expect(gaCount).toBe(0);
   });
 
-  test("GA4 loads only after accepting (skipped when GA is not configured)", async ({
+  test("Consent Mode v2: denied by default, granted only after accept", async ({
     page,
   }) => {
     await page.goto("/");
+
+    interface ConsentCmd extends Array<unknown> {
+      0: "consent";
+    }
+    const consentCommands = await page.evaluate(() =>
+      ((window as { dataLayer?: ConsentCmd[] }).dataLayer ?? []).filter(
+        (cmd) => Array.isArray(cmd) && cmd[0] === "consent",
+      ),
+    );
+    // Only meaningful when GA is configured (skipped in local builds).
+    test.skip(
+      consentCommands.length === 0,
+      "GA not configured in this build (NEXT_PUBLIC_GA_ID unset)",
+    );
+
+    // Consent Mode v2: the default state must be denied for every category.
+    const defaults = consentCommands.filter((cmd) => cmd[1] === "default");
+    expect(defaults.length).toBeGreaterThan(0);
+    for (const cmd of defaults) {
+      const state = cmd[2] as Record<string, string>;
+      expect(state.analytics_storage).toBe("denied");
+      expect(state.ad_storage).toBe("denied");
+    }
+
+    // Accepting must push a consent update granting analytics_storage.
     await page.getByRole("button", { name: "Zaakceptuj" }).click();
-    const appeared = await page
-      .waitForSelector("script[src*='googletagmanager']", { timeout: 5_000 })
+    const granted = await page
+      .waitForFunction(
+        () =>
+          ((window as { dataLayer?: unknown[] }).dataLayer ?? []).some(
+            (cmd) =>
+              Array.isArray(cmd) &&
+              cmd[0] === "consent" &&
+              cmd[1] === "update" &&
+              (cmd[2] as Record<string, string> | undefined)?.analytics_storage ===
+                "granted",
+          ),
+        undefined,
+        { timeout: 5_000 },
+      )
       .then(() => true)
       .catch(() => false);
-    // NEXT_PUBLIC_GA_ID is optional (unset in local builds); consent
-    // gating is still enforced by the "absent before consent" test above.
-    test.skip(!appeared, "GA not configured in this build (NEXT_PUBLIC_GA_ID unset)");
-    expect(appeared).toBe(true);
+    expect(granted).toBe(true);
+  });
+});
+
+test.describe("cookies policy page", () => {
+  test("renders, has a canonical, and is linked from the footer", async ({ page }) => {
+    await page.goto("/polityka-cookies");
+    await expect(page).toHaveTitle(/Polityka plików cookie/);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      `${SITE_URL}/polityka-cookies`,
+    );
+    // Documented cookie inventory must be visible.
+    await expect(page.locator("code", { hasText: "cookie-consent" })).toBeVisible();
+    await expect(page.locator("code", { hasText: "_ga" }).first()).toBeVisible();
+
+    // Linked from the footer (discoverable for users + crawlers).
+    await page.goto("/");
+    await expect(page.locator("footer a[href='/polityka-cookies']")).toBeVisible();
+  });
+
+  test("cookie banner links to the cookies policy", async ({ page }) => {
+    await page.goto("/");
+    const banner = page.getByRole("region", { name: "Informacja o plikach cookie" });
+    await expect(banner).toBeVisible();
+    await expect(banner.locator("a[href='/polityka-cookies']")).toBeVisible();
   });
 });

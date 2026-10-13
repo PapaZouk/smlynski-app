@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useState, useEffect, useRef, type ChangeEvent, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
@@ -22,6 +22,8 @@ interface FormData {
   mediaElectricity: boolean;
   mediaWater: boolean;
   message: string;
+  /** Honeypot — humans never see or fill this (see below). */
+  website: string;
 }
 
 const initialFormData: FormData = {
@@ -39,9 +41,21 @@ const initialFormData: FormData = {
   mediaElectricity: false,
   mediaWater: false,
   message: "",
+  website: "",
 };
 
 type SubmitStatus = "idle" | "sending" | "sent" | "error";
+
+/**
+ * Spam heuristics for a serverless static site (docs/adr/0013-spam-protection.md):
+ * - honeypot: the "website" field is present but positioned off-screen and
+ *   hidden from assistive tech — humans never fill it, dumb bots do.
+ *   NB: NOT display:none, which many bots skip when hunting for traps.
+ * - time-trap: no human fills a 15-field form in under MIN_FILL_MS; bots
+ *   that submit instantly are rejected.
+ * Both paths fake a successful send so bots cannot learn what tripped them.
+ */
+const MIN_FILL_MS = 3_000;
 
 const inputClass =
   "mt-2 block w-full rounded-md border-ink-300 bg-paper p-3 text-ink-900 shadow-sm focus:border-gold-500 focus:ring-gold-500";
@@ -80,6 +94,12 @@ function toTemplateParams(data: FormData) {
 export function ContactForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [status, setStatus] = useState<SubmitStatus>("idle");
+  /** When the form mounted — powers the time-trap (see MIN_FILL_MS). */
+  const mountedAt = useRef<number>(0);
+
+  useEffect(() => {
+    mountedAt.current = Date.now();
+  }, []);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -96,6 +116,16 @@ export function ContactForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Spam heuristics: honeypot filled, or submitted impossibly fast.
+    // Fake success so bots cannot probe which check caught them.
+    const filledHoneypot = formData.website.trim() !== "";
+    const tooFast = Date.now() - mountedAt.current < MIN_FILL_MS;
+    if (filledHoneypot || tooFast) {
+      setStatus("sent");
+      setFormData(initialFormData);
+      return;
+    }
 
     if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
       setStatus("error");
@@ -119,7 +149,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-lg border border-paper-dark bg-white p-6 shadow-sm sm:p-8"
+      className="relative rounded-lg border border-paper-dark bg-white p-6 shadow-sm sm:p-8"
       noValidate={false}
     >
       <h2 className="text-2xl font-bold text-ink-900">Skontaktuj się z nami</h2>
@@ -304,6 +334,25 @@ export function ContactForm() {
           </div>
         </div>
       </fieldset>
+
+      {/* Honeypot — off-screen, NOT display:none (bots skip display:none
+          traps). aria-hidden + tabIndex=-1 keep it out of the a11y tree and
+          keyboard order. */}
+      <div
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-px w-px overflow-hidden"
+      >
+        <label htmlFor="website">Strona www (nie wypełniaj)</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.website}
+          onChange={handleChange}
+        />
+      </div>
 
       <button
         type="submit"

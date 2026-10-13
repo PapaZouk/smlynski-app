@@ -62,6 +62,13 @@ export function SiteFooter() {
           className="underline-offset-4 hover:text-gold-300 hover:underline"
         >
           Polityka prywatności
+        </Link>{" "}
+        ·{" "}
+        <Link
+          href="/polityka-cookies"
+          className="underline-offset-4 hover:text-gold-300 hover:underline"
+        >
+          Polityka plików cookie
         </Link>
       </div>
     </footer>
