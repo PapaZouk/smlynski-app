@@ -31,3 +31,7 @@ src/lib/image-manifest.json
 test-results/
 playwright-report/
 blob-report/
+
+# vitepress (local docs server only — never built or deployed)
+docs/.vitepress/dist/
+docs/.vitepress/cache/

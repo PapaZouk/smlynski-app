@@ -12,6 +12,9 @@ export default defineConfig([
     ".next/**",
     "out/**",
     "next-env.d.ts",
-    "*.config.mjs",
+    "next.config.mjs",
+    // vitepress generated files (local docs server — see docs/.vitepress/)
+    "docs/.vitepress/cache/**",
+    "docs/.vitepress/dist/**",
   ]),
 ]);

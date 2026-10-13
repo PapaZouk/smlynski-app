@@ -17,6 +17,8 @@
     "format:check": "prettier --check .",
     "test:e2e": "npm run build && playwright test",
     "preview": "npx serve out",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -51,6 +53,7 @@
     "serve": "^14.2.6",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitepress": "^1.6.4"
   }
 }

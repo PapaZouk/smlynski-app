@@ -8,3 +8,7 @@ package-lock.json
 # generated image pipeline output (npm run optimize:images)
 public/optimized
 src/lib/image-manifest.json
+
+# vitepress generated files (local docs server)
+docs/.vitepress/cache
+docs/.vitepress/dist
