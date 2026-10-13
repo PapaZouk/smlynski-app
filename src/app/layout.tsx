@@ -67,7 +67,11 @@ export default function RootLayout({
       <body className="flex min-h-svh flex-col">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+          // Sanitize per Next.js JSON-LD guidance: escape "<" to prevent
+          // injection if content ever contains user-provided strings.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessJsonLd).replace(/</g, "\\u003c"),
+          }}
         />
         <ConsentProvider>
           <SiteHeader />

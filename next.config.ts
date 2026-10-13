@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Fully static site: no server runtime, deployable as static files on Vercel.
-  // See docs/adr/0002-nextjs-static-export.md
+  // See docs/adr/0003-static-export-vercel.md
   output: "export",
 
   // Pin the workspace root so Turbopack does not walk up the directory tree

@@ -1,7 +1,7 @@
 /** Shared content model types.
  *
  * Every page renders from these typed, statically-imported structures —
- * there is no runtime API. See docs/adr/0003-static-content-model.md.
+ * there is no runtime API. See docs/adr/0004-static-content-model.md.
  */
 
 /** A portfolio project (realizacja). */

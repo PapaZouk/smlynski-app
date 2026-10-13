@@ -8,7 +8,7 @@ import { useConsent } from "./ConsentProvider";
  *
  * The long inline privacy policy of the old app was replaced with a link to
  * a dedicated /polityka-prywatnosci page (better for SEO, easier to keep
- * up to date). See docs/adr/0009-consent-analytics.md.
+ * up to date). See docs/adr/0010-consent-analytics-maps.md.
  */
 export function CookieBanner() {
   const { isPending, accept, reject } = useConsent();

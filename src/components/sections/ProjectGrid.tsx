@@ -11,7 +11,7 @@ const PROJECTS_PER_PAGE = 4;
  * Projects grid with client-side pagination.
  *
  * Receives already-sorted projects as props from the server page — no
- * fetching, no loading spinners (see docs/adr/0008-modernization.md).
+ * fetching, no loading spinners (see docs/adr/0009-modernization.md).
  */
 export function ProjectGrid({ projects }: { projects: Project[] }) {
   const [currentPage, setCurrentPage] = useState(1);

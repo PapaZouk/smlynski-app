@@ -73,7 +73,7 @@ function toTemplateParams(data: FormData) {
 
 /**
  * Contact form sending via EmailJS directly from the browser — no server
- * code, which keeps the site fully static. See docs/adr/0006-contact-emailjs.md.
+ * code, which keeps the site fully static. See docs/adr/0007-contact-emailjs.md.
  *
  * Configured via NEXT_PUBLIC_EMAILJS_* env vars (public keys by design).
  */

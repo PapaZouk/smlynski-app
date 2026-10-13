@@ -9,7 +9,7 @@ const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID;
  * Google Analytics, loaded only after the user consents.
  *
  * If NEXT_PUBLIC_GA_ID is not configured the component renders nothing.
- * See docs/adr/0009-consent-analytics.md.
+ * See docs/adr/0010-consent-analytics-maps.md.
  */
 export function Analytics() {
   const { consent } = useConsent();

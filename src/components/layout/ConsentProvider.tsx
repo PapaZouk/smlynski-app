@@ -17,7 +17,7 @@ import {
  * from the client snapshot, so the banner never flashes for returning
  * visitors and there is no hydration mismatch under `output: "export"`.
  * GA only loads once consent is granted — GDPR behavior preserved.
- * See docs/adr/0009-consent-analytics.md.
+ * See docs/adr/0010-consent-analytics-maps.md.
  */
 
 const CONSENT_COOKIE = "cookie-consent";

@@ -12,7 +12,7 @@ import { cn } from "@/lib/cn";
  *
  * Single source of truth for links (siteConfig.nav) — desktop and mobile
  * menus render from the same array, unlike the old app where links were
- * hardcoded twice. See docs/adr/0008-modernization.md.
+ * hardcoded twice. See docs/adr/0009-modernization.md.
  */
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
