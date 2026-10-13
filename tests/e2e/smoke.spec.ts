@@ -243,7 +243,7 @@ test.describe("consent & analytics", () => {
     await page.goto("/");
     await expect(banner(page)).toBeVisible();
 
-    await page.getByRole("button", { name: "Zaakceptuj" }).click();
+    await page.getByRole("button", { name: "Akceptuję wszystkie" }).click();
     await expect(banner(page)).toBeHidden();
 
     const cookie = (await page.context().cookies()).find(
@@ -258,7 +258,7 @@ test.describe("consent & analytics", () => {
 
   test("rejecting also persists and never shows the banner again", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("button", { name: "Odrzuć" }).click();
+    await page.getByRole("button", { name: "Tylko niezbędne" }).click();
     await expect(banner(page)).toBeHidden();
     await page.reload();
     await expect(banner(page)).toBeHidden();
@@ -308,7 +308,7 @@ test.describe("consent & analytics", () => {
     }
 
     // Accepting must push a consent update granting analytics_storage.
-    await page.getByRole("button", { name: "Zaakceptuj" }).click();
+    await page.getByRole("button", { name: "Akceptuję wszystkie" }).click();
     const granted = await page
       .waitForFunction(
         () =>
@@ -338,9 +338,12 @@ test.describe("cookies policy page", () => {
       "href",
       `${SITE_URL}/polityka-cookies`,
     );
-    // Documented cookie inventory must be visible.
-    await expect(page.locator("code", { hasText: "cookie-consent" })).toBeVisible();
-    await expect(page.locator("code", { hasText: "_ga" }).first()).toBeVisible();
+    // The cookie inventory must be described in plain language.
+    await expect(page.getByText("Niezbędne", { exact: true })).toBeVisible();
+    await expect(page.getByText("Statystyczne (Google Analytics)")).toBeVisible();
+    // Both consent choices are explained.
+    await expect(page.getByText("„Akceptuję wszystkie”")).toBeVisible();
+    await expect(page.getByText("„Tylko niezbędne”")).toBeVisible();
 
     // Linked from the footer (discoverable for users + crawlers).
     await page.goto("/");
