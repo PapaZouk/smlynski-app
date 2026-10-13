@@ -1,13 +1,24 @@
-# dotenv environment variable files
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# env files — never commit secrets
 .env
 .env.development.local
 .env.test.local
 .env.production.local
 .env.local
-**/*.xml
 
-# Fresh build directory
-_fresh/
-# npm dependencies
-node_modules/
+# IDE
 .idea
+
+# misc
+.DS_Store
+*.tsbuildinfo
+
+# downloaded by `npm run preview` (npx serve)
+.cache

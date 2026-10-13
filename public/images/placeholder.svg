@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Zdjęcie wkrótce">
+  <!-- Branded placeholder shown until a real photo is provided.
+       See docs/adr/0005-media-placeholders.md. -->
+  <rect width="1200" height="900" fill="#27221d"/>
+  <!-- Subtle diagonal hatching for texture -->
+  <g stroke="#3b342d" stroke-width="6">
+    <line x1="-200" y1="200" x2="400" y2="-200"/>
+    <line x1="-100" y1="400" x2="600" y2="0"/>
+    <line x1="0" y1="600" x2="800" y2="0"/>
+    <line x1="600" y1="900" x2="1200" y2="300"/>
+    <line x1="800" y1="900" x2="1300" y2="400"/>
+    <line x1="1000" y1="900" x2="1400" y2="500"/>
+  </g>
+  <rect width="1200" height="900" fill="#12100e" opacity="0.55"/>
+  <!-- Camera icon -->
+  <g transform="translate(600 390)" fill="none" stroke="#d4982a" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-150" y="-90" width="300" height="200" rx="24"/>
+    <path d="M-60 -90 l24 -42 h72 l24 42"/>
+    <circle cx="0" cy="20" r="62"/>
+  </g>
+  <text x="600" y="590" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="#f7f5f1">Zdjęcie wkrótce</text>
+  <text x="600" y="650" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#a89f94">Sebastian Młyński — Usługi Remontowo-Budowlane</text>
+</svg>
