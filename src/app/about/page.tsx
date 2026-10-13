@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Media } from "@/components/ui/Media";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { feedbacks } from "@/content/feedbacks";
 import { pageMetadata } from "@/lib/seo";
@@ -16,7 +16,7 @@ export default function AboutPage() {
   return (
     <>
       <section className="relative isolate overflow-hidden bg-ink-950 py-20 sm:py-28">
-        <Image
+        <Media
           src="/images/about-office-desk.jpeg"
           alt=""
           fill

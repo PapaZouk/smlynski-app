@@ -7,6 +7,8 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ConsentProvider } from "@/components/layout/ConsentProvider";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { Analytics } from "@/components/layout/Analytics";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -74,6 +76,11 @@ export default function RootLayout({
           <CookieBanner />
           <Analytics />
         </ConsentProvider>
+        {/* Cookieless first-party telemetry — always on, no consent needed
+            (see docs/adr/0014-testing-and-telemetry.md and the cookie
+            policy page). Kept outside ConsentProvider on purpose. */}
+        <VercelAnalytics />
+        <SpeedInsights />
       </body>
     </html>
   );

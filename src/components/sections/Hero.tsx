@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { Media } from "@/components/ui/Media";
 
 /**
  * Home page hero — in-flow section (min-h with svh), no fixed positioning
@@ -9,7 +9,7 @@ import Image from "next/image";
 export function Hero() {
   return (
     <section className="relative flex min-h-[85svh] items-center overflow-hidden bg-ink-950">
-      <Image
+      <Media
         src="/images/hero-image.jpg"
         alt=""
         fill
