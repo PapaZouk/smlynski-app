@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { offers } from "@/content/offers";
 import { Media } from "@/components/ui/Media";
+import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata } from "@/lib/seo";
 
 interface OfferDetailProps {
   params: Promise<{ slug: string }>;
@@ -21,10 +23,12 @@ export async function generateMetadata({
   if (!offer) {
     return {};
   }
-  return {
+  return pageMetadata({
+    path: `/offer/${offer.slug}`,
     title: offer.title,
     description: offer.summary,
-  };
+    ogImage: offer.image ?? undefined,
+  });
 }
 
 export default async function OfferDetailPage({ params }: OfferDetailProps) {
@@ -37,6 +41,13 @@ export default async function OfferDetailPage({ params }: OfferDetailProps) {
 
   return (
     <div>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Strona główna", path: "/" },
+          { name: "Oferta", path: "/offer" },
+          { name: offer.title },
+        ])}
+      />
       {/* Hero with cover image (or placeholder) and overlaid title. */}
       <section className="relative flex min-h-[40svh] items-center overflow-hidden bg-ink-950">
         <Media

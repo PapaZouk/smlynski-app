@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import { siteConfig } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/polityka-prywatnosci",
   title: "Polityka prywatności",
   description: "Polityka prywatności strony internetowej firmy.",
-};
+});
 
 /**
  * Privacy policy — previously an expandable block inside the cookie popup,

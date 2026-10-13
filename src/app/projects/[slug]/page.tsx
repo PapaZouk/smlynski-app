@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { projects } from "@/content/projects";
 import { formatDate } from "@/lib/format";
 import { Gallery } from "@/components/sections/Gallery";
+import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata } from "@/lib/seo";
 
 interface ProjectDetailProps {
   params: Promise<{ slug: string }>;
@@ -22,10 +24,12 @@ export async function generateMetadata({
   if (!project) {
     return {};
   }
-  return {
+  return pageMetadata({
+    path: `/projects/${project.slug}`,
     title: project.title,
     description: project.summary,
-  };
+    ogImage: project.images[0],
+  });
 }
 
 export default async function ProjectDetailPage({ params }: ProjectDetailProps) {
@@ -38,6 +42,13 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Strona główna", path: "/" },
+          { name: "Nasze realizacje", path: "/projects" },
+          { name: project.title },
+        ])}
+      />
       <nav aria-label="Okruszki" className="text-sm text-ink-600">
         <Link
           href="/projects"

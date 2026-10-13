@@ -13,6 +13,11 @@ export interface NavLink {
 }
 
 export interface SiteConfig {
+  /**
+   * Production origin including www — the canonical host.
+   * Apex (smlynski.pl) redirects here at the Vercel edge (see README).
+   */
+  siteUrl: string;
   companyName: string;
   /** Short slogan used in the <title> and meta descriptions. */
   tagline: string;
@@ -37,6 +42,7 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
+  siteUrl: "https://www.smlynski.pl",
   companyName: "Sebastian Młyński",
   tagline: "Usługi Remontowo-Budowlane",
   legalName: "Sebastian Młyński - Usługi Remontowo-Budowlane",

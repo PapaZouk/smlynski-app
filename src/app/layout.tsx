@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Inter } from "next/font/google";
 import { siteConfig } from "@/content/site";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ConsentProvider } from "@/components/layout/ConsentProvider";
@@ -21,7 +22,7 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://smlynski.pl"),
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
     default: `${siteConfig.companyName} — ${siteConfig.tagline}`,
     template: `%s | ${siteConfig.companyName}`,
@@ -65,14 +66,7 @@ export default function RootLayout({
   return (
     <html lang="pl" className={`${inter.variable} ${archivo.variable}`}>
       <body className="flex min-h-svh flex-col">
-        <script
-          type="application/ld+json"
-          // Sanitize per Next.js JSON-LD guidance: escape "<" to prevent
-          // injection if content ever contains user-provided strings.
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessJsonLd).replace(/</g, "\\u003c"),
-          }}
-        />
+        <JsonLd data={localBusinessJsonLd} />
         <ConsentProvider>
           <SiteHeader />
           <main className="flex-1">{children}</main>

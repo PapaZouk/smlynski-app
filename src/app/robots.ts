@@ -1,7 +1,5 @@
 import type { MetadataRoute } from "next";
-
-// NOTE: replace with the production domain once it is known.
-const BASE_URL = "https://smlynski.pl";
+import { absoluteUrl } from "@/lib/seo";
 
 // Required for `output: "export"` — metadata routes must be fully static.
 export const dynamic = "force-static";
@@ -13,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${BASE_URL}/sitemap.xml`,
+    sitemap: absoluteUrl("/sitemap.xml"),
   };
 }

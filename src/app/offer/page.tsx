@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { offers } from "@/content/offers";
 import { OfferGrid } from "@/components/sections/OfferGrid";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/offer",
   title: "Oferta",
   description:
     "Zakres usług firmy Sebastian Młyński: szpachlowanie agregatem, malowanie, remonty łazienek, układanie paneli, sufity i ścianki działowe.",
-};
+});
 
 /** Offer listing page. Data is statically imported at build. */
 export default function OfferPage() {

@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { feedbacks } from "@/content/feedbacks";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/about",
   title: "O nas",
   description:
     "O firmie Sebastian Młyński — Usługi Remontowo-Budowlane. Działamy od 2018 roku na terenie Gdańska, Gdyni, Rumi i Wejherowa.",
-};
+});
 
 /** About page — company intro over a photo hero. */
 export default function AboutPage() {

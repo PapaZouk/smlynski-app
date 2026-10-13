@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { ContactInfo } from "@/components/contact/ContactInfo";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { CompanyMap } from "@/components/contact/CompanyMap";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/contact",
   title: "Kontakt",
   description:
     "Skontaktuj się z firmą Sebastian Młyński — Usługi Remontowo-Budowlane. Wycena remontu i wykończenia w Trójmieście.",
-};
+});
 
 /** Contact page: address card + EmailJS form + map. */
 export default function ContactPage() {

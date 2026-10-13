@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { projects } from "@/content/projects";
 import { ProjectGrid } from "@/components/sections/ProjectGrid";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: "/projects",
   title: "Nasze realizacje",
   description:
     "Portfolio realizacji firmy Sebastian Młyński — remonty łazienek, malowanie, zabudowy i wykończenia w Trójmieście.",
-};
+});
 
 /** Projects listing page. Data is statically imported and sorted at build. */
 export default function ProjectsPage() {
