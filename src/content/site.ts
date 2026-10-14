@@ -38,6 +38,11 @@ export interface SiteConfig {
   };
   socials: {
     facebook: string;
+    /**
+     * Temporary toggle — set to `true` to show the Facebook link again.
+     * While `false` the URL is kept but never rendered or linked.
+     */
+    facebookEnabled: boolean;
   };
 }
 
@@ -55,19 +60,21 @@ export const siteConfig: SiteConfig = {
   ],
   contact: {
     // TODO: uzupełnij danymi firmy (dostępne w poprzedniej wersji przez env)
-    street: "ul. Przykładowa 1",
-    postalCode: "80-000",
-    city: "Wejherowo",
+    street: "ul. Jarzębinowa 26",
+    postalCode: "84-217",
+    city: "Jeleńska Huta",
     phone: "+48 578 716 169",
-    email: "kontakt@example.com",
+    email: "remonty.mlynski@gmail.com",
   },
   map: {
     // Gdańsk coordinates as a sensible default for the Tricity area.
-    lat: 54.352,
-    lng: 18.6466,
+    lat: 54.44680289387105,
+    lng: 18.222905583946716,
   },
   socials: {
     // TODO: uzupełnić prawdziwy adres profilu na Facebooku.
     facebook: "https://www.facebook.com/",
+    // Wyłączone tymczasowo — ustawić na true, aby przywrócić link do Facebooka.
+    facebookEnabled: false,
   },
 };
