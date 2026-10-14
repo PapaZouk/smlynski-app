@@ -1,0 +1,16 @@
+{
+  "name": "Sebastian Młyński — Usługi Remontowo-Budowlane",
+  "short_name": "Młyński",
+  "description": "Usługi remontowo-budowlane w Trójmieście: Gdańsk, Gdynia, Sopot, Rumia, Wejherowo.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#12100e",
+  "theme_color": "#d4982a",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

@@ -12,6 +12,7 @@
  *    not production with blank sections)
  *  - details arrays have at least one non-blank entry
  *  - image paths are unique and use the /images/ convention
+ *  - relatedOffer (optional) references an existing offer slug
  *  - feedback ids are unique
  *  - site config: https siteUrl without trailing slash, unique nav hrefs,
  *    plausible phone/email
@@ -120,7 +121,7 @@ function checkImagePaths(entry, label, images) {
   }
 }
 
-function checkProjects(projects) {
+function checkProjects(projects, offerSlugs) {
   checkSlugs(projects, "projects");
   for (const project of projects) {
     const label = `projects[${project.slug ?? "?"}]`;
@@ -131,6 +132,18 @@ function checkProjects(projects) {
     }
     checkDetails(project, label, project.details);
     checkImagePaths(project, label, project.images ?? []);
+
+    // relatedOffer (optional): must reference an existing offer slug —
+    // the project page renders a link to it.
+    if (project.relatedOffer !== undefined) {
+      if (!nonBlank(project.relatedOffer)) {
+        fail(`${label}: "relatedOffer" is empty (omit the field instead)`);
+      } else if (!offerSlugs.has(project.relatedOffer)) {
+        fail(
+          `${label}: relatedOffer "${project.relatedOffer}" does not match any offer slug`,
+        );
+      }
+    }
 
     // completedAt: real calendar date (rejects 2024-02-31), not the future.
     const match = ISO_DATE.exec(project.completedAt ?? "");
@@ -272,7 +285,7 @@ async function main() {
   const started = Date.now();
   const { projects, offers, feedbacks, siteConfig } = await loadContent();
 
-  checkProjects(projects);
+  checkProjects(projects, new Set(offers.map((offer) => offer.slug)));
   checkOffers(offers);
   checkFeedbacks(feedbacks);
   checkSiteConfig(siteConfig);

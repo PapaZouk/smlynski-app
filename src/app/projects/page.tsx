@@ -1,5 +1,6 @@
 import { projects } from "@/content/projects";
 import { ProjectGrid } from "@/components/sections/ProjectGrid";
+import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -17,6 +18,12 @@ export default function ProjectsPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Strona główna", path: "/" },
+          { name: "Nasze realizacje", path: "/projects" },
+        ])}
+      />
       <div className="max-w-2xl">
         <h1 className="text-4xl font-extrabold text-ink-900 sm:text-5xl">
           Nasze realizacje

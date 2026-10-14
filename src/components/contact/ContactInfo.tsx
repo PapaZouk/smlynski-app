@@ -33,7 +33,7 @@ export function ContactInfo() {
       </address>
       <div className="mt-6 border-t border-paper-dark pt-4 text-sm text-ink-600">
         <p className="font-semibold text-ink-800">Obsługiwany obszar</p>
-        <p className="mt-1">Gdańsk · Gdynia · Rumia · Wejherowo i okolice</p>
+        <p className="mt-1">{siteConfig.serviceArea.join(" · ")} i okolice</p>
       </div>
     </div>
   );

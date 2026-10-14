@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "@/content/projects";
+import { offers } from "@/content/offers";
 import { formatDate } from "@/lib/format";
 import { Gallery } from "@/components/sections/Gallery";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
@@ -40,16 +41,29 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
     notFound();
   }
 
+  const relatedOffer = project.relatedOffer
+    ? offers.find((entry) => entry.slug === project.relatedOffer)
+    : undefined;
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Strona główna", path: "/" },
           { name: "Nasze realizacje", path: "/projects" },
-          { name: project.title },
+          { name: project.title, path: `/projects/${project.slug}` },
         ])}
       />
       <nav aria-label="Okruszki" className="text-sm text-ink-600">
+        <Link
+          href="/"
+          className="underline-offset-4 hover:text-gold-600 hover:underline"
+        >
+          Strona główna
+        </Link>
+        <span aria-hidden="true" className="mx-2">
+          /
+        </span>
         <Link
           href="/projects"
           className="underline-offset-4 hover:text-gold-600 hover:underline"
@@ -124,6 +138,18 @@ export default async function ProjectDetailPage({ params }: ProjectDetailProps) 
           <Gallery images={project.images} projectTitle={project.title} />
         </div>
       </section>
+
+      {relatedOffer && (
+        <p className="mt-10 text-ink-600">
+          Powiązana usługa:{" "}
+          <Link
+            href={`/offer/${relatedOffer.slug}`}
+            className="font-semibold text-gold-700 underline-offset-4 hover:underline"
+          >
+            {relatedOffer.title}
+          </Link>
+        </p>
+      )}
 
       <div className="mt-12">
         <Link

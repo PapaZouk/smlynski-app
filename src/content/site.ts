@@ -31,7 +31,14 @@ export interface SiteConfig {
     phone: string;
     email: string;
   };
-  /** Map center coordinates (Tricity area). */
+  /**
+   * Cities served, nominative case — single source for structured data
+   * (areaServed), meta-description tags and the "Obsługiwany obszar" label.
+   * Prose that needs grammatical cases (e.g. "na terenie Gdańska…")
+   * keeps its own hand-written wording.
+   */
+  serviceArea: string[];
+  /** Office geo coordinates — JSON-LD `geo` and the contact-page map center. */
   map: {
     lat: number;
     lng: number;
@@ -66,8 +73,10 @@ export const siteConfig: SiteConfig = {
     phone: "+48 578 716 169",
     email: "remonty.mlynski@gmail.com",
   },
+  // Tricity area served by the company (structured data + labels).
+  serviceArea: ["Gdańsk", "Gdynia", "Sopot", "Rumia", "Wejherowo"],
   map: {
-    // Gdańsk coordinates as a sensible default for the Tricity area.
+    // Actual coordinates of the company office.
     lat: 54.44680289387105,
     lng: 18.222905583946716,
   },

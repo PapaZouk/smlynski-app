@@ -28,6 +28,7 @@ export const offers: Offer[] = [
       "Wnęk i zabudów – Dostosowanych do Twoich potrzeb, np. na szafy czy półki.",
       "Nasza oferta łączy nowoczesne technologie, wysokiej jakości materiały oraz precyzję wykonania.",
       "Realizujemy projekty indywidualne, dopasowując zabudowy do stylu i funkcji wnętrza. Gwarantujemy szybki montaż, trwałość i estetykę. Wybierz nas, a stworzymy dla Ciebie przestrzeń, która zachwyca! Skontaktuj się już dziś i omów szczegóły swojego projektu!",
+      "Gdzie realizujemy: Trójmiasto — Gdańsk, Gdynia, Sopot, Rumia, Wejherowo i najbliższe okolice. Skontaktuj się z nami, aby omówić zakres prac i termin realizacji.",
     ],
   },
   {
@@ -44,6 +45,7 @@ export const offers: Offer[] = [
       "Wykończenie i aranżacja – Wybór mebli i dodatków, które podkreślą styl i funkcjonalność Twojej łazienki.",
       "Stosujemy nowoczesne technologie oraz wysokiej jakości materiały, zapewniając trwałość i odporność na wilgoć. Nasza oferta to połączenie estetyki, funkcjonalności i dbałości o każdy detal. Realizujemy projekty indywidualne, dopasowane do potrzeb klientów. Wybierz nas, a stworzymy łazienkę, która spełni Twoje marzenia!",
       "Skontaktuj się z nami, aby omówić szczegóły i uzyskać wycenę!",
+      "Gdzie realizujemy: Trójmiasto — Gdańsk, Gdynia, Sopot, Rumia, Wejherowo i najbliższe okolice. Skontaktuj się z nami, aby omówić zakres prac i termin realizacji.",
     ],
   },
   {
@@ -60,6 +62,7 @@ export const offers: Offer[] = [
       "Zabudowy kartonowo-gipsowe – Ścianki działowe, sufity podwieszane, wnęki i inne rozwiązania.",
       "Wykończenie łazienek i kuchni – Wysokiej jakości materiały odporne na wilgoć i zabrudzenia.",
       "Stawiamy na nowoczesne technologie, trwałe materiały i precyzyjne wykonanie. Realizujemy zarówno drobne modernizacje, jak i kompleksowe projekty, dostosowując je do Twoich potrzeb. Gwarantujemy terminowość, profesjonalizm oraz atrakcyjne ceny. Skontaktuj się z nami, aby uzyskać wycenę i zrealizować remont swoich marzeń!",
+      "Gdzie realizujemy: Trójmiasto — Gdańsk, Gdynia, Sopot, Rumia, Wejherowo i najbliższe okolice. Skontaktuj się z nami, aby omówić zakres prac i termin realizacji.",
     ],
   },
   {
@@ -77,6 +80,7 @@ export const offers: Offer[] = [
       "Naprawa i renowacja powierzchni – Usuwanie pęknięć, odprysków i plam przed malowaniem.",
       "Pracujemy z wysokiej jakości materiałami, zapewniając trwałe i estetyczne wykończenie. Realizujemy zarówno drobne odświeżenia, jak i kompleksowe malowanie wnętrz, dostosowując się do indywidualnych potrzeb klientów.",
       "Postaw na naszą firmę, aby stworzyć wnętrze, które zachwyca wyglądem i trwałością. Skontaktuj się z nami, aby omówić szczegóły i uzyskać bezpłatną wycenę!",
+      "Gdzie realizujemy: Trójmiasto — Gdańsk, Gdynia, Sopot, Rumia, Wejherowo i najbliższe okolice. Skontaktuj się z nami, aby omówić zakres prac i termin realizacji.",
     ],
   },
   {
@@ -93,6 +97,7 @@ export const offers: Offer[] = [
       "Wykończenie kuchni i łazienek – Materiały odporne na wilgoć i zabrudzenia, zapewniające funkcjonalność i estetykę.",
       "Prace adaptacyjne – Zmiana układu przestrzeni biurowej, tworzenie open space lub prywatnych gabinetów.",
       "Stosujemy nowoczesne technologie i wysokiej jakości materiały, realizując projekty, które poprawiają komfort pracy i estetykę wnętrz. Dostosowujemy je do specyficznych potrzeb klientów, dbając o szybki czas realizacji i minimalizowanie zakłóceń w pracy. Wybierz naszą firmę, aby zrealizować remont biura sprzyjający efektywnej pracy.",
+      "Gdzie realizujemy: Trójmiasto — Gdańsk, Gdynia, Sopot, Rumia, Wejherowo i najbliższe okolice. Skontaktuj się z nami, aby omówić zakres prac i termin realizacji.",
     ],
   },
   {
@@ -108,6 +113,7 @@ export const offers: Offer[] = [
       "Montaż paneli – Precyzyjne układanie paneli z zachowaniem norm, co gwarantuje estetyczny i trwały efekt.",
       "Wykończenie – Zabezpieczenie krawędzi i montaż listew przypodłogowych, które dopełniają całość.",
       "Dzięki doświadczeniu i profesjonalnemu podejściu, nasze usługi zapewniają estetyczny wygląd i długotrwałą funkcjonalność. Zajmujemy się kompleksowym wykonaniem – od przygotowania podłoża po finalne wykończenie. Pracujemy z najwyższej jakości materiałami, zapewniając odporność na codzienne użytkowanie. Realizujemy projekty w mieszkaniach i domach, dostosowując je do indywidualnych potrzeb klienta. Gwarantujemy terminowość i fachowość, dbając o każdy detal.",
+      "Gdzie realizujemy: Trójmiasto — Gdańsk, Gdynia, Sopot, Rumia, Wejherowo i najbliższe okolice. Skontaktuj się z nami, aby omówić zakres prac i termin realizacji.",
     ],
   },
   {
@@ -124,6 +130,7 @@ export const offers: Offer[] = [
       "Montaż instalacji – Wykonujemy niezbędne instalacje elektryczne, wodno-kanalizacyjne i wentylacyjne.",
       "Wykończenie wnętrz – Przeprowadzamy malowanie, układanie podłóg oraz montaż sufitów podwieszanych.",
       "Z nami przekształcisz poddasze w wygodną, estetyczną przestrzeń. Dbamy o każdy szczegół, oferując najwyższą jakość usług.",
+      "Gdzie realizujemy: Trójmiasto — Gdańsk, Gdynia, Sopot, Rumia, Wejherowo i najbliższe okolice. Skontaktuj się z nami, aby omówić zakres prac i termin realizacji.",
     ],
   },
   {
@@ -140,6 +147,7 @@ export const offers: Offer[] = [
       "Izolacja akustyczna – Montaż materiałów redukujących hałas, co poprawia komfort akustyczny wewnątrz pomieszczenia.",
       "Montaż i wykończenie – Precyzyjne wykonanie izolacji, połączone z profesjonalnym wykończeniem, które daje estetyczny i trwały efekt.",
       "Dzięki wieloletniemu doświadczeniu oraz zastosowaniu wysokiej jakości materiałów, zapewniamy skuteczność naszych usług, a także oszczędności w dłuższej perspektywie czasowej. Dbamy o każdy szczegół, aby pomieszczenia były zarówno funkcjonalne, jak i komfortowe przez cały rok. Wybierając naszą firmę, inwestujesz w przestrzeń, która zapewni Ci ciepło i ciszę.",
+      "Gdzie realizujemy: Trójmiasto — Gdańsk, Gdynia, Sopot, Rumia, Wejherowo i najbliższe okolice. Skontaktuj się z nami, aby omówić zakres prac i termin realizacji.",
     ],
   },
 ];

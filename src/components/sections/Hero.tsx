@@ -33,8 +33,8 @@ export function Hero() {
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper/80">
             Szpachlowanie agregatem, malowanie, kompleksowe remonty łazienek, układanie
-            paneli i zabudowy z karton-gipsu. Działamy na terenie Gdańska, Gdyni, Rumi i
-            Wejherowa.
+            paneli i zabudowy z karton-gipsu. Działamy na terenie Gdańska, Gdyni,
+            Sopotu, Rumi i Wejherowa.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link

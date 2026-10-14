@@ -19,6 +19,11 @@ export interface Project {
   details: string[];
   /** Image paths under /public; the first one is the cover. Empty = placeholder. */
   images: string[];
+  /**
+   * Optional slug of the related /offer/ service — rendered as a
+   * "Powiązana usługa" link on the case study (internal linking).
+   */
+  relatedOffer?: string;
 }
 
 /** A service offer. */

@@ -69,6 +69,10 @@ export default defineConfig({
             link: "/adr/0013-spam-protection",
           },
           { text: "0014 — Testy i telemetria", link: "/adr/0014-testing-telemetry" },
+          {
+            text: "0017 — SEO: kanoniczne URL-e i dane strukturalne",
+            link: "/adr/0017-seo-canonicals",
+          },
         ],
       },
     ],

@@ -36,6 +36,7 @@ export const projects: Project[] = [
       "/images/projects/wykonczenie-wnetrza-mieszkania/1.jpg",
       "/images/projects/wykonczenie-wnetrza-mieszkania/2.jpg",
     ],
+    relatedOffer: "remonty-wnetrz-mieszkan-i-domow",
   },
   {
     slug: "realizacja-projektu-lazienki",
@@ -56,6 +57,7 @@ export const projects: Project[] = [
       "Efekt końcowy: połączenie kamienia, drewna i nowoczesnych detali stworzyło elegancką, funkcjonalną przestrzeń, idealną do codziennego relaksu.",
     ],
     images: ["/images/projects/realizacja-projektu-lazienki/1.jpg"],
+    relatedOffer: "remonty-lazienek",
   },
   {
     slug: "eleganckie-schody-w-perfekcyjnym-wydaniu",
@@ -122,5 +124,6 @@ export const projects: Project[] = [
       "/images/projects/gdynia-strzelcow/5.jpg",
       "/images/projects/gdynia-strzelcow/6.jpg",
     ],
+    relatedOffer: "remonty-lazienek",
   },
 ];
