@@ -19,10 +19,12 @@ export function JsonLd({ data }: { data: Record<string, unknown> }) {
 }
 
 /**
- * Breadcrumb structured data for detail pages.
+ * Breadcrumb structured data for detail and listing pages.
  *
- * `items` lists ancestors first, then the current page (without a `path` —
- * it is the page being viewed).
+ * `items` lists ancestors first, then the current page. Every item —
+ * including the current one — should carry its `path`: Google's breadcrumb
+ * guidance expects an `item` URL on each ListItem, and omitting it on the
+ * last level weakens the signal.
  */
 export function breadcrumbJsonLd(
   items: Array<{ name: string; path?: string }>,

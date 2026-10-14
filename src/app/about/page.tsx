@@ -8,7 +8,7 @@ export const metadata = pageMetadata({
   path: "/about",
   title: "O nas",
   description:
-    "O firmie Sebastian Młyński — Usługi Remontowo-Budowlane. Działamy od 2018 roku na terenie Gdańska, Gdyni, Rumi i Wejherowa.",
+    "O firmie Sebastian Młyński — Usługi Remontowo-Budowlane. Działamy od 2018 roku na terenie Gdańska, Gdyni, Sopotu, Rumi i Wejherowa.",
 });
 
 /** About page — company intro over a photo hero. */
@@ -38,8 +38,8 @@ export default function AboutPage() {
               działowych, sufitów zawieszanych i inne prace wykończeniowe.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-paper/80">
-              Teren działania firmy to Gdańsk, Gdynia, Rumia i Wejherowo. Skontaktuj
-              się, a otrzymasz wycenę, która będzie godna Twojej uwagi.
+              Teren działania firmy to Gdańsk, Gdynia, Sopot, Rumia i Wejherowo.
+              Skontaktuj się, a otrzymasz wycenę, która będzie godna Twojej uwagi.
             </p>
             <Link
               href="/contact"

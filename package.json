@@ -7,10 +7,11 @@
     "node": ">=22.18"
   },
   "scripts": {
-    "predev": "npm run optimize:images",
+    "predev": "npm run optimize:images && npm run generate:og",
     "dev": "next dev",
-    "build": "npm run optimize:images && npm run check:content && next build",
+    "build": "npm run optimize:images && npm run generate:og && npm run check:content && next build",
     "optimize:images": "node scripts/optimize-images.mjs",
+    "generate:og": "node scripts/generate-og-image.mjs",
     "check:content": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-content.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",

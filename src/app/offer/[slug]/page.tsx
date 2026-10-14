@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { offers } from "@/content/offers";
+import { siteConfig } from "@/content/site";
 import { Media } from "@/components/ui/Media";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
-import { pageMetadata } from "@/lib/seo";
+import { absoluteUrl, businessId, pageMetadata } from "@/lib/seo";
 
 interface OfferDetailProps {
   params: Promise<{ slug: string }>;
@@ -39,15 +40,28 @@ export default async function OfferDetailPage({ params }: OfferDetailProps) {
     notFound();
   }
 
+  /** Service schema ties the offer to the business entity + served area. */
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: offer.title,
+    description: offer.summary,
+    serviceType: offer.title,
+    url: absoluteUrl(`/offer/${offer.slug}`),
+    provider: { "@id": businessId },
+    areaServed: siteConfig.serviceArea.map((name) => ({ "@type": "City", name })),
+  };
+
   return (
     <div>
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Strona główna", path: "/" },
           { name: "Oferta", path: "/offer" },
-          { name: offer.title },
+          { name: offer.title, path: `/offer/${offer.slug}` },
         ])}
       />
+      <JsonLd data={serviceJsonLd} />
       {/* Hero with cover image (or placeholder) and overlaid title. */}
       <section className="relative flex min-h-[40svh] items-center overflow-hidden bg-ink-950">
         <Media
@@ -64,6 +78,15 @@ export default async function OfferDetailPage({ params }: OfferDetailProps) {
         />
         <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
           <nav aria-label="Okruszki" className="text-sm text-paper/70">
+            <Link
+              href="/"
+              className="underline-offset-4 hover:text-gold-300 hover:underline"
+            >
+              Strona główna
+            </Link>
+            <span aria-hidden="true" className="mx-2">
+              /
+            </span>
             <Link
               href="/offer"
               className="underline-offset-4 hover:text-gold-300 hover:underline"
@@ -90,6 +113,28 @@ export default async function OfferDetailPage({ params }: OfferDetailProps) {
             ))}
           </div>
         </article>
+
+        {/* Internal links to sibling services — descriptive anchors that
+            spread link equity across all offer pages. */}
+        <nav aria-labelledby="other-services-heading" className="mt-10">
+          <h2 id="other-services-heading" className="text-2xl font-bold text-ink-900">
+            Pozostałe usługi
+          </h2>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {offers
+              .filter((entry) => entry.slug !== offer.slug)
+              .map((entry) => (
+                <li key={entry.slug}>
+                  <Link
+                    href={`/offer/${entry.slug}`}
+                    className="inline-flex min-h-10 items-center rounded-md border border-ink-200 px-4 py-2 text-sm font-medium text-ink-700 transition-colors hover:border-gold-500 hover:text-gold-700"
+                  >
+                    {entry.title}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </nav>
 
         <div className="mt-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <Link

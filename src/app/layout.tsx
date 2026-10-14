@@ -9,6 +9,7 @@ import { CookieBanner } from "@/components/layout/CookieBanner";
 import { Analytics } from "@/components/layout/Analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import { absoluteUrl, businessId, DEFAULT_OG_IMAGE } from "@/lib/seo";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -23,6 +24,9 @@ const archivo = Archivo({
   display: "swap",
 });
 
+/** Google Search Console token — supplied per environment (see .env.example). */
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
@@ -31,10 +35,26 @@ export const metadata: Metadata = {
   },
   description:
     "Usługi remontowo-budowlane w Trójmieście: szpachlowanie agregatem, malowanie, remonty łazienek, układanie paneli i zabudowy z karton-gipsu.",
+  // Browser/app icons. favicon.ico also lives at public/ for the implicit
+  // /favicon.ico request; these tags make the rest explicit.
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  manifest: "/site.webmanifest",
+  ...(googleSiteVerification
+    ? { verification: { google: googleSiteVerification } }
+    : {}),
   openGraph: {
     type: "website",
     locale: "pl_PL",
     siteName: siteConfig.companyName,
+    // Fallback card for pages that do not use pageMetadata (e.g. 404).
+    images: [{ url: absoluteUrl(DEFAULT_OG_IMAGE), width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [absoluteUrl(DEFAULT_OG_IMAGE)],
   },
 };
 
@@ -42,9 +62,13 @@ export const metadata: Metadata = {
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
+  "@id": businessId,
   name: siteConfig.legalName,
   description:
     "Usługi remontowo-budowlane: szpachlowanie agregatem, malowanie, remonty łazienek, układanie paneli, zabudowy z karton-gipsu.",
+  url: absoluteUrl("/"),
+  logo: absoluteUrl("/apple-touch-icon.png"),
+  image: absoluteUrl(DEFAULT_OG_IMAGE),
   telephone: siteConfig.contact.phone,
   email: siteConfig.contact.email,
   address: {
@@ -59,7 +83,11 @@ const localBusinessJsonLd = {
     latitude: siteConfig.map.lat,
     longitude: siteConfig.map.lng,
   },
-  areaServed: ["Gdańsk", "Gdynia", "Rumia", "Wejherowo"],
+  areaServed: siteConfig.serviceArea.map((name) => ({ "@type": "City", name })),
+  // Exposed only while the feature toggle is on (siteConfig.socials).
+  ...(siteConfig.socials.facebookEnabled
+    ? { sameAs: [siteConfig.socials.facebook] }
+    : {}),
 };
 
 export default function RootLayout({

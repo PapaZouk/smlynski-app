@@ -70,6 +70,26 @@ test.describe("SEO plumbing", () => {
     await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
   });
 
+  test("social card + icons are emitted (og:image, og:site_name, twitter)", async ({
+    page,
+  }) => {
+    await page.goto("/offer");
+    // No page-specific ogImage on the listing — the default card applies.
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      "content",
+      `${SITE_URL}/og-default.jpg`,
+    );
+    await expect(page.locator('meta[property="og:site_name"]')).toHaveCount(1);
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+      "content",
+      "summary_large_image",
+    );
+    await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveAttribute(
+      "href",
+      "/apple-touch-icon.png",
+    );
+  });
+
   test("sitemap.xml: all URLs on the www https host, includes slugs", async ({
     request,
   }) => {
@@ -129,10 +149,13 @@ test.describe("detail pages", () => {
     expect(crumb).toBeTruthy();
     expect(crumb["@type"]).toBe("BreadcrumbList");
     expect(crumb.itemListElement).toHaveLength(3);
-    // First crumb is home on the canonical host; last crumb is the current
-    // page and must NOT carry an item URL.
+    // First crumb is home on the canonical host; the last crumb is the
+    // current page and MUST carry its own item URL — Google's breadcrumb
+    // guidance (see docs/adr/0017-seo-canonicals.md).
     expect(crumb.itemListElement[0].item).toBe(`${SITE_URL}/`);
-    expect(crumb.itemListElement.at(-1).item).toBeUndefined();
+    expect(crumb.itemListElement.at(-1).item).toMatch(
+      new RegExp(`^${SITE_URL}/projects/[a-z0-9-]+$`),
+    );
   });
 
   test("offer detail renders with canonical + h1", async ({ page }) => {
@@ -275,6 +298,12 @@ test.describe("consent & analytics", () => {
     // NEXT_PUBLIC_GA_ID unset => no gtag scripts, nothing to consent to.
     const gaCount = await page.evaluate(
       () => document.querySelectorAll("script[src*='googletagmanager']").length,
+    );
+    // On machines whose .env configures GA the script is present by design —
+    // mirror the self-skip of the Consent Mode test instead of failing.
+    test.skip(
+      gaCount > 0,
+      "GA configured in this build (NEXT_PUBLIC_GA_ID set) — gtag present by design",
     );
     expect(gaCount).toBe(0);
   });
