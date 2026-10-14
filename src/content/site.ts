@@ -57,8 +57,8 @@ export const siteConfig: SiteConfig = {
     // TODO: uzupełnij danymi firmy (dostępne w poprzedniej wersji przez env)
     street: "ul. Przykładowa 1",
     postalCode: "80-000",
-    city: "Gdańsk",
-    phone: "+48 000 000 000",
+    city: "Wejherowo",
+    phone: "+48 578 716 169",
     email: "kontakt@example.com",
   },
   map: {

@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "//": "Edge-level headers for the static export (Next redirects()/headers() do NOT run with output:'export'). See docs/adr/0012-security-headers.md.",
   "headers": [
     {
       "source": "/(.*)",
