@@ -11,7 +11,8 @@ import type { Project } from "@/lib/types";
  *    np. "/images/projects/remont-lazienki-gdansk/1.jpg".
  *    Pusta tablica = placeholder (docs/adr/0005-media-placeholders.md).
  *
- * Wpisy poniżej pochodzą z smlynski-api (eksport `projects.json`).
+ * Wpisy poniżej pochodzą z smlynski-api (eksport `projects.json`) — nowsze
+ * realizacje dodawane są ręcznie.
  */
 
 export const projects: Project[] = [
@@ -95,6 +96,31 @@ export const projects: Project[] = [
     images: [
       "/images/projects/taras-ogrodowy/1.jpg",
       "/images/projects/taras-ogrodowy/2.jpg",
+    ],
+  },
+  {
+    slug: "remont-lazienki-gdynia-strzelcow",
+    title: "Remont łazienki w Gdyni",
+    summary:
+      "Nowoczesna łazienka w Gdyni – jasne wielkoformatowe płytki, bezprogowa strefa prysznica i podwieszana zabudowa. Funkcjonalne wnętrze dopracowane w każdym detalu.",
+    location: "Gdynia, ul. Strzelców 51/6",
+    completedAt: "2025-11-15",
+    details: [
+      "Remont łazienki w Gdyni: kompleksowa realizacja od demontażu starego wyposażenia po finalne wykończenie – układy, instalacje i estetyka w jednym projekcie.",
+      "Ściany i podłoga: jasne, wielkoformatowe płytki ceramiczne ułożone z wąskimi fugami, optycznie powiększające pomieszczenie.",
+      "Strefa prysznica: kabina bezprogowa z odpływem liniowym i szkłem hartowanym, wygodna w codziennym użytkowaniu i łatwa w czyszczeniu.",
+      "Oświetlenie: punktowe LED-y przy lustrze oraz subtelne światło ogólne tworzące ciepły, funkcjonalny klimat.",
+      "Wyposażenie: podwieszana szafka z umywalką nablatową i bateriaścienna – minimalizm w połączeniu z wygodą.",
+      "Instalacje: wymiana instalacji wodno-kanalizacyjnej i elektrycznej zgodnie z obowiązującymi normami.",
+      "Efekt końcowy: spójna, jasna łazienka, która pozostaje praktyczna i łatwa w utrzymaniu przez lata.",
+    ],
+    images: [
+      "/images/projects/gdynia-strzelcow/1.jpg",
+      "/images/projects/gdynia-strzelcow/2.jpg",
+      "/images/projects/gdynia-strzelcow/3.jpg",
+      "/images/projects/gdynia-strzelcow/4.jpg",
+      "/images/projects/gdynia-strzelcow/5.jpg",
+      "/images/projects/gdynia-strzelcow/6.jpg",
     ],
   },
 ];
