@@ -23,7 +23,7 @@ const MAX_DESCRIPTION_LENGTH = 160;
 
 const CITY_LIST = siteConfig.serviceArea.join(", ");
 /** Tag for descriptions with no locality signal at all. */
-const AREA_TAG = ` — Trójmiasto: ${CITY_LIST}.`;
+const AREA_TAG = ` — Trójmiasto i okolice: ${CITY_LIST}.`;
 /** Tag for descriptions that already name the region — adds the cities only. */
 const CITY_TAG = ` — ${CITY_LIST}.`;
 
@@ -50,7 +50,9 @@ function descriptionWithArea(description: string): string {
   const budget = MAX_DESCRIPTION_LENGTH - tag.length;
   let text = description.trim();
   if (text.length > budget) {
-    text = text.slice(0, budget);
+    // budget − 1 leaves room for the ellipsis appended below, so the final
+    // description never exceeds MAX_DESCRIPTION_LENGTH.
+    text = text.slice(0, budget - 1);
     const lastSpace = text.lastIndexOf(" ");
     if (lastSpace > budget * 0.6) {
       text = text.slice(0, lastSpace);

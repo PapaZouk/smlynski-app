@@ -1,5 +1,18 @@
 import { defineConfig, devices } from "@playwright/test";
 
+// Expose build-time env to the specs — NEXT_PUBLIC_GA_ID decides which GA
+// assertions are meaningful (smoke.spec.ts reads it to distinguish
+// "GA unconfigured" from "gtag injected by a regression"). Precedence
+// mirrors Next.js: .env.local wins over .env, and loadEnvFile never
+// overrides keys already present, so load the more specific file first.
+for (const file of [".env.local", ".env"]) {
+  try {
+    process.loadEnvFile(file);
+  } catch {
+    // absent file — GA simply stays "unconfigured" for this run.
+  }
+}
+
 /**
  * Local smoke-test suite — NEVER runs on Vercel (the deploy gate is
  * `npm run build`). See docs/adr/0014-testing-and-telemetry.md.
