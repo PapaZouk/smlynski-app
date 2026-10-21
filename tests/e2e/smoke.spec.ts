@@ -294,16 +294,18 @@ test.describe("consent & analytics", () => {
   test("GA4 is not injected at all when unconfigured (local builds)", async ({
     page,
   }) => {
+    // Gate on the build config (loaded from .env*.local by
+    // playwright.config.ts), NOT on observed output — deciding from the
+    // output would let a regression that injects gtag on an unconfigured
+    // build silently self-skip.
+    test.skip(
+      Boolean(process.env.NEXT_PUBLIC_GA_ID),
+      "GA configured in this build (NEXT_PUBLIC_GA_ID set) — gtag present by design",
+    );
     await page.goto("/");
     // NEXT_PUBLIC_GA_ID unset => no gtag scripts, nothing to consent to.
     const gaCount = await page.evaluate(
       () => document.querySelectorAll("script[src*='googletagmanager']").length,
-    );
-    // On machines whose .env configures GA the script is present by design —
-    // mirror the self-skip of the Consent Mode test instead of failing.
-    test.skip(
-      gaCount > 0,
-      "GA configured in this build (NEXT_PUBLIC_GA_ID set) — gtag present by design",
     );
     expect(gaCount).toBe(0);
   });
@@ -311,27 +313,39 @@ test.describe("consent & analytics", () => {
   test("Consent Mode v2: denied by default, granted only after accept", async ({
     page,
   }) => {
-    await page.goto("/");
-
-    interface ConsentCmd extends Array<unknown> {
-      0: "consent";
-    }
-    const consentCommands = await page.evaluate(() =>
-      ((window as { dataLayer?: ConsentCmd[] }).dataLayer ?? []).filter(
-        (cmd) => Array.isArray(cmd) && cmd[0] === "consent",
-      ),
-    );
-    // Only meaningful when GA is configured (skipped in local builds).
+    // Gate on the build config, not on observed dataLayer contents — the
+    // assertions below are meaningless (and must not fail) without GA.
     test.skip(
-      consentCommands.length === 0,
+      !process.env.NEXT_PUBLIC_GA_ID,
       "GA not configured in this build (NEXT_PUBLIC_GA_ID unset)",
     );
+    await page.goto("/");
+
+    // NB: gtag() pushes Arguments objects (NOT arrays) onto dataLayer, so
+    // these checks index positionally — Array.isArray would never match.
+    // The ga-init inline script runs afterInteractive: wait for its
+    // consent defaults to land before reading them.
+    const sawDefaults = await page
+      .waitForFunction(
+        () =>
+          (
+            (window as unknown as { dataLayer?: ArrayLike<unknown>[] }).dataLayer ?? []
+          ).some((cmd) => cmd[0] === "consent" && cmd[1] === "default"),
+        undefined,
+        { timeout: 5_000 },
+      )
+      .then(() => true)
+      .catch(() => false);
+    expect(sawDefaults, "ga-init should queue consent defaults").toBe(true);
 
     // Consent Mode v2: the default state must be denied for every category.
-    const defaults = consentCommands.filter((cmd) => cmd[1] === "default");
+    const defaults = await page.evaluate(() =>
+      ((window as unknown as { dataLayer?: ArrayLike<unknown>[] }).dataLayer ?? [])
+        .filter((cmd) => cmd[0] === "consent" && cmd[1] === "default")
+        .map((cmd) => cmd[2] as Record<string, string>),
+    );
     expect(defaults.length).toBeGreaterThan(0);
-    for (const cmd of defaults) {
-      const state = cmd[2] as Record<string, string>;
+    for (const state of defaults) {
       expect(state.analytics_storage).toBe("denied");
       expect(state.ad_storage).toBe("denied");
     }
@@ -341,9 +355,10 @@ test.describe("consent & analytics", () => {
     const granted = await page
       .waitForFunction(
         () =>
-          ((window as { dataLayer?: unknown[] }).dataLayer ?? []).some(
+          (
+            (window as unknown as { dataLayer?: ArrayLike<unknown>[] }).dataLayer ?? []
+          ).some(
             (cmd) =>
-              Array.isArray(cmd) &&
               cmd[0] === "consent" &&
               cmd[1] === "update" &&
               (cmd[2] as Record<string, string> | undefined)?.analytics_storage ===

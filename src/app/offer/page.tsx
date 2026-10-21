@@ -7,7 +7,7 @@ export const metadata = pageMetadata({
   path: "/offer",
   title: "Oferta",
   description:
-    "Zakres usług: szpachlowanie agregatem, malowanie, remonty łazienek, układy paneli, sufity i ścianki działowe. Trójmiasto — Gdańsk, Gdynia, Sopot.",
+    "Zakres usług: szpachlowanie agregatem, malowanie, remonty łazienek, układanie paneli, sufity i ścianki działowe. Trójmiasto — Gdańsk, Gdynia, Sopot.",
 });
 
 /** Offer listing page. Data is statically imported at build. */
